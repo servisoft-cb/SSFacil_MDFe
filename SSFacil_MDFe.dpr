@@ -1,0 +1,43 @@
+program SSFacil_MDFe;
+
+uses
+  Forms,
+  UMenu in 'UMenu.pas' {fMenu},
+  DmdDatabase in '..\ssfacil\DmdDatabase.pas' {dmDatabase: TDataModule},
+  uUtilPadrao in '..\ssfacil\uUtilPadrao.pas',
+  UEscolhe_Filial in '..\ssfacil\UEscolhe_Filial.pas' {frmEscolhe_Filial},
+  rsDBUtils in '..\rslib\nova\rsDBUtils.pas',
+  UCadVeiculo in 'UCadVeiculo.pas' {frmCadVeiculo},
+  UDMCadVeiculo in 'UDMCadVeiculo.pas' {DMCadVeiculo: TDataModule},
+  LogProvider in '..\logs\src\LogProvider.pas',
+  LogTypes in '..\logs\src\LogTypes.pas',
+  UDMCadProprietario in 'UDMCadProprietario.pas' {DMCadProprietario: TDataModule},
+  UCadProprietario in 'UCadProprietario.pas' {frmCadProprietario},
+  UDMCadCondutor in 'UDMCadCondutor.pas' {DMCadCondutor: TDataModule},
+  UCadCondutor in 'UCadCondutor.pas' {frmCadCondutor},
+  UDMCadMDFe in 'UDMCadMDFe.pas' {DMCadMDFe: TDataModule},
+  UCadMDFe in 'UCadMDFe.pas' {frmCadMDFe},
+  UDMCadSeguradora in 'UDMCadSeguradora.pas' {DMCadSeguradora: TDataModule},
+  UCadSeguradora in 'UCadSeguradora.pas' {frmCadSeguradora},
+  UCadMDFe_Seguradora in 'UCadMDFe_Seguradora.pas' {frmCadMDFe_Seguradora},
+  USel_NFe_MDFe in 'USel_NFe_MDFe.pas' {frmSel_NFe_MDFe},
+  UDMEnvio in 'UDMEnvio.pas' {DMEnvio: TDataModule},
+  enviMDFe_v300 in 'mdfe\enviMDFe_v300.pas',
+  mdfeModalRodoviario_v300 in 'mdfe\mdfeModalRodoviario_v300.pas',
+  mdfeModalAereo_v300 in 'mdfe\mdfeModalAereo_v300.pas',
+  mdfeModalAquaviario_v300 in 'mdfe\mdfeModalAquaviario_v300.pas',
+  mdfeModalFerroviario_v300 in 'mdfe\mdfeModalFerroviario_v300.pas',
+  UXMLMDFe3_00 in 'mdfe\UXMLMDFe3_00.pas',
+  uNFeComandos in '..\ssfacil\uNFeComandos.pas',
+  uNFeConsts in '..\NFe 3.10\NFESrv\uNFeConsts.pas',
+  UCadMDFe_Enc in 'UCadMDFe_Enc.pas' {frmCadMDFe_Enc},
+  UCadMDFe_Condutor in 'UCadMDFe_Condutor.pas' {frmCadMDFe_Condutor};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TdmDatabase, dmDatabase);
+  Application.CreateForm(TfMenu, fMenu);
+  Application.Run;
+end.
