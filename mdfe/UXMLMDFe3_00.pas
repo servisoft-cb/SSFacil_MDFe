@@ -341,14 +341,15 @@ begin
   while not fDMEnvio.cdsMDFe_Reboque.Eof do
   begin
     Reboque := rodo.VeicReboque.Add;
-    Reboque.CInt  := IntToStr(fDMEnvio.cdsMDFe_ReboqueID_VEICULO.AsInteger);
+    //13/05/2019
+    //Reboque.CInt  := IntToStr(fDMEnvio.cdsMDFe_ReboqueID_VEICULO.AsInteger);
     Reboque.Placa := trim(fDMEnvio.cdsMDFe_ReboquePLACA.AsString);
     Reboque.RENAVAM := trim(fDMEnvio.cdsMDFe_ReboqueRENAVAM.AsString);
-    Reboque.Tara    := Replace(FormatFloat('0.00',fDMEnvio.cdsMDFe_ReboqueTARA_KG.AsFloat),',','.');
+    Reboque.Tara    := FormatFloat('0',fDMEnvio.cdsMDFe_ReboqueTARA_KG.AsFloat);
     if StrToFloat(FormatFloat('0.0000',fDMEnvio.cdsMDFe_ReboqueCAPACIDADE_KG.AsFloat)) > 0 then
-      Reboque.CapKG := Replace(FormatFloat('0.00',fDMEnvio.cdsMDFe_ReboqueCAPACIDADE_KG.AsFloat),',','.');
+      Reboque.CapKG := FormatFloat('0',fDMEnvio.cdsMDFe_ReboqueCAPACIDADE_KG.AsFloat);
     if StrToFloat(FormatFloat('0.0000',fDMEnvio.cdsMDFe_ReboqueCAPACIDADE_M3.AsFloat)) > 0 then
-      Reboque.CapM3 := Replace(FormatFloat('0.00',fDMEnvio.cdsMDFe_ReboqueCAPACIDADE_M3.AsFloat),',','.');
+      Reboque.CapM3 := FormatFloat('0',fDMEnvio.cdsMDFe_ReboqueCAPACIDADE_M3.AsFloat);
     if fDMEnvio.cdsMDFe_ReboqueID_PROPRIETARIO.AsInteger > 0 then
     begin
       if fDMEnvio.cdsMDFe_ReboqueCNPJ_CPF_PROPRIETARIO.AsString <> fDMEnvio.cdsMDFeCNPJ_CPF_FILIAL.AsString then
