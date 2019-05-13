@@ -344,9 +344,7 @@ begin
     Reboque.CInt  := IntToStr(fDMEnvio.cdsMDFe_ReboqueID_VEICULO.AsInteger);
     Reboque.Placa := trim(fDMEnvio.cdsMDFe_ReboquePLACA.AsString);
     Reboque.RENAVAM := trim(fDMEnvio.cdsMDFe_ReboqueRENAVAM.AsString);
-
-    Reboque.TpCar := fDMEnvio.cdsMDFe_ReboqueTIPO_CARROCERIA.AsString;
-    Reboque.UF    := fDMEnvio.cdsMDFe_ReboqueUF_PLACA.AsString;
+    Reboque.Tara    := Replace(FormatFloat('0.00',fDMEnvio.cdsMDFe_ReboqueTARA_KG.AsFloat),',','.');
     if StrToFloat(FormatFloat('0.0000',fDMEnvio.cdsMDFe_ReboqueCAPACIDADE_KG.AsFloat)) > 0 then
       Reboque.CapKG := Replace(FormatFloat('0.00',fDMEnvio.cdsMDFe_ReboqueCAPACIDADE_KG.AsFloat),',','.');
     if StrToFloat(FormatFloat('0.0000',fDMEnvio.cdsMDFe_ReboqueCAPACIDADE_M3.AsFloat)) > 0 then
@@ -365,11 +363,17 @@ begin
           //Reboque.Prop.RNTRC := '00000000';
           //Reboque.Prop.RNTRC := '';
         Reboque.Prop.XNome  := fDMEnvio.cdsMDFe_ReboqueNOME_PROPRIETARIO.AsString;
-        Reboque.Prop.IE     := fDMEnvio.cdsMDFe_ReboqueINSC_ESTADUAL_PROPRIETARIO.AsString;
+        if trim(fDMEnvio.cdsMDFe_ReboqueINSC_ESTADUAL_PROPRIETARIO.AsString) <> '' then
+          Reboque.Prop.IE     := fDMEnvio.cdsMDFe_ReboqueINSC_ESTADUAL_PROPRIETARIO.AsString;
         Reboque.Prop.UF     := fDMEnvio.cdsMDFe_ReboqueUF_PROPRIETARIO.AsString;
         Reboque.Prop.TpProp := fDMEnvio.cdsMDFe_ReboqueTIPO_REG_PROPRIETARIO.AsString;
       end;
     end;
+
+    Reboque.TpCar := fDMEnvio.cdsMDFe_ReboqueTIPO_CARROCERIA.AsString;
+    Reboque.UF    := fDMEnvio.cdsMDFe_ReboqueUF_PLACA.AsString;
+
+
     fDMEnvio.cdsMDFe_Reboque.Next;
   end;
   //***************
