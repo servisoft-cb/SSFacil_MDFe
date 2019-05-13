@@ -708,14 +708,15 @@ object DMEnvio: TDMEnvio
       'OPRIETARIO, PV.rntrc RNTRC_PROPRIETARIO,'#13#10'PV.pessoa PESSOA_PROPR' +
       'IETARIO'#13#10'FROM MDFE_REBOQUE M'#13#10'INNER JOIN veiculo V'#13#10'ON M.id_veic' +
       'ulo = V.id'#13#10'LEFT JOIN proprietario_vei PV'#13#10'ON V.id_proprietario ' +
-      '= PV.ID'#13#10'WHERE M.ID = :ID'
+      '= V.ID'#13#10'WHERE M.ID = :ID'
     DataSource = sdsMDFe_Mestre
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'ID'
         ParamType = ptInput
+        Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 144
@@ -1466,7 +1467,7 @@ object DMEnvio: TDMEnvio
   end
   object frxReport1: TfrxReport
     Tag = 1
-    Version = '5.6.8'
+    Version = '5.1.1'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -1491,7 +1492,6 @@ object DMEnvio: TDMEnvio
     Background = False
     HTMLTags = True
     Quality = 95
-    Transparency = False
     Author = 'FastReport'
     Subject = 'FastReport PDF export'
     ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
@@ -1501,7 +1501,6 @@ object DMEnvio: TDMEnvio
     FitWindow = False
     CenterWindow = False
     PrintScaling = False
-    PdfA = False
     Left = 640
     Top = 415
   end
@@ -1516,7 +1515,6 @@ object DMEnvio: TDMEnvio
     TimeOut = 60
     ConfurmReading = False
     UseMAPI = SMTP
-    MAPISendFlag = 0
     Left = 680
     Top = 415
   end

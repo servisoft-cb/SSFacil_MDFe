@@ -31,8 +31,7 @@ uses
   uNFeComandos in '..\ssfacil\uNFeComandos.pas',
   UCadMDFe_Enc in 'UCadMDFe_Enc.pas' {frmCadMDFe_Enc},
   UCadMDFe_Condutor in 'UCadMDFe_Condutor.pas' {frmCadMDFe_Condutor},
-  DmdDatabase_NFeBD in '..\ssfacil\DmdDatabase_NFeBD.pas' {dmDatabase_NFeBD: TDataModule},
-  uNFeConsts in '..\ssfacil\uNFeConsts.pas';
+  DmdDatabase_NFeBD in '..\ssfacil\DmdDatabase_NFeBD.pas' {dmDatabase_NFeBD: TDataModule};
 
 {$R *.res}
 
