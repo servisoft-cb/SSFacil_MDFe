@@ -408,6 +408,11 @@ begin
       MessageDlg('*** MDFe já enviado', mtInformation, [mbOk], 0);
       exit;
     end;
+    if trim(fDMCadMDFe.cdsMDFeRECIBO_MDFE.AsString) <> '' then
+    begin
+      MessageDlg('*** MDFe já possui nº de Recibo de enviado', mtInformation, [mbOk], 0);
+      exit;
+    end;
   end;  
 
   if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
