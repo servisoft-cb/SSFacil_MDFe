@@ -930,16 +930,6 @@ object frmCadMDFe: TfrmCadMDFe
           OnClick = btnDanfeClick
           OnExit = btnDanfeExit
         end
-        object btnBuscar: TBitBtn
-          Left = 816
-          Top = 5
-          Width = 75
-          Height = 25
-          Caption = 'Buscar'
-          TabOrder = 3
-          Visible = False
-          OnClick = btnBuscarClick
-        end
         object btnEncerrar: TNxButton
           Left = 461
           Top = 2
@@ -1012,7 +1002,7 @@ object frmCadMDFe: TfrmCadMDFe
             C8C86B6B6B9A9A9AEEEEEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 4
+          TabOrder = 3
           Transparent = True
           OnClick = btnEncerrarClick
         end
@@ -1081,9 +1071,19 @@ object frmCadMDFe: TfrmCadMDFe
             FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 4
           Transparent = True
           OnClick = btnIncluir_CondutorClick
+        end
+        object btnOutros: TNxButton
+          Left = 787
+          Top = 6
+          Width = 122
+          Caption = 'Outras Op'#231#245'es'
+          PopupMenu = PopupMenu1
+          ShowArrow = True
+          TabOrder = 5
+          Visible = False
         end
       end
       object Panel14: TPanel
@@ -1409,7 +1409,7 @@ object frmCadMDFe: TfrmCadMDFe
         Top = 185
         Width = 935
         Height = 430
-        ActivePage = TS_MDFe
+        ActivePage = TS_NFe
         ActivePageDefault = TS_NFe
         Align = alClient
         BackgroundColor = clSilver
@@ -1417,7 +1417,7 @@ object frmCadMDFe: TfrmCadMDFe
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 3
+        TabIndex = 0
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -6021,5 +6021,17 @@ object frmCadMDFe: TfrmCadMDFe
     NotAllowed = naDisabled
     Left = 577
     Top = 60
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 849
+    Top = 110
+    object Buscar1: TMenuItem
+      Caption = 'Buscar'
+      OnClick = Buscar1Click
+    end
+    object Encerrar1: TMenuItem
+      Caption = 'Encerrar'
+      OnClick = Encerrar1Click
+    end
   end
 end

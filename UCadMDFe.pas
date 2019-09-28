@@ -181,7 +181,6 @@ type
     btnConfirmar_Lacre: TNxButton;
     btnExcluir_Lacre: TNxButton;
     RzDBGrid12: TRzDBGrid;
-    btnBuscar: TBitBtn;
     btnEncerrar: TNxButton;
     RzGroupBox1: TRzGroupBox;
     Label14: TLabel;
@@ -250,6 +249,10 @@ type
     ckUsarCidade_NFe: TCheckBox;
     CurrencyEdit4: TCurrencyEdit;
     CurrencyEdit5: TCurrencyEdit;
+    btnOutros: TNxButton;
+    PopupMenu1: TPopupMenu;
+    Buscar1: TMenuItem;
+    Encerrar1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -309,7 +312,6 @@ type
     procedure RxDBLookupCombo2Exit(Sender: TObject);
     procedure btnEnvioClick(Sender: TObject);
     procedure btnConfirmar_LacreClick(Sender: TObject);
-    procedure btnBuscarClick(Sender: TObject);
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnCancelar_MDFeClick(Sender: TObject);
     procedure btnExcluir_PedagioClick(Sender: TObject);
@@ -327,6 +329,8 @@ type
     procedure RxDBLookupCombo4Exit(Sender: TObject);
     procedure DBEdit4Enter(Sender: TObject);
     procedure DBEdit2DblClick(Sender: TObject);
+    procedure Buscar1Click(Sender: TObject);
+    procedure Encerrar1Click(Sender: TObject);
   private
     { Private declarations }
     vTipo_Reg: String;
@@ -384,7 +388,8 @@ var
 implementation
 
 uses DmdDatabase, rsDBUtils, UMenu, uUtilPadrao, Math, MaskUtils, UCadMDFe_Seguradora, USel_NFe_MDFe, UXMLMDFe3_00, uNFeComandos,
-  UCadMDFe_Enc, SysConst, TypInfo, RTLConsts, UCadMDFe_Condutor, StdConvs;
+  UCadMDFe_Enc, SysConst, TypInfo, RTLConsts, UCadMDFe_Condutor, StdConvs,
+  UEncerrar_MDFe;
 
 {$R *.dfm}
 
@@ -1578,7 +1583,7 @@ begin
     end;
     fDMCadMDFe.prc_Localizar(fDMCadMDFe.cdsConsultaID.AsInteger);
 
-    btnBuscarClick(Sender);
+    Buscar1Click(Sender);
   finally
     FreeAndNil(fDMEnvio);
     FreeAndNilProperties(sRecibo);
@@ -1601,85 +1606,6 @@ begin
   fDMCadMDFe.cdsMDFe_LacreNUM_LACRE.AsString := Edit1.Text;
   fDMCadMDFe.cdsMDFe_LacreTIPO.AsString      := 'R';
   fDMCadMDFe.cdsMDFe_Lacre.Post;
-end;
-
-procedure TfrmCadMDFe.btnBuscarClick(Sender: TObject);
-var
-  recibo, protocolo: string;
-  Xml: TMemoryStream;
-  //sXml: TStringStream;
-  vCNPjAux: String;
-  sProtocolo: TStringList;
-  vArq: String;
-begin
-  if vRecibo_MDFe <> '' then
-    recibo := vRecibo_MDFe
-  else
-    recibo := InputBox('Informe o recibo', 'Recibo', '');
-  if trim(recibo) = '' then
-    exit;
-
-  Xml := TMemoryStream.Create;
-  try
-    sProtocolo := TStringList.Create;
-    sProtocolo.Delimiter := '|';
-    vCNPjAux := Monta_Numero(fDMCadMDFe.cdsFilialCNPJ_CPF.AsString,0);
-    sProtocolo.DelimitedText := MDFe_Buscar(fnc_LocalServidorNFe_Local,
-                                   vCNPjAux  ,
-                                   recibo,
-                                   mMDFe,
-                                   Xml);
-
-    vProtocolo_MDFe   := sProtocolo[0];
-    vDtProtocolo_MDFe := sProtocolo[1];
-
-    mMDFe.Position := 0;
-    Xml.SaveToStream(mMDFe);
-
-    prc_gravar_Busca;
-
-    fDMCadMDFe.prc_Localizar(fDMCadMDFe.cdsConsultaID.AsInteger);
-
-    //Salvar arquivo na pasta do XML
-    if trim(fDMCadMDFe.qParametros_MDFeENDXMLMDFE.AsString) <> '' then
-    begin
-      vNomeArquivo := Monta_Diretorio('X',fDMCadMDFe.qParametros_MDFeENDXMLMDFE.AsString,fDMCadMDFe.cdsMDFeSERIE.AsString,
-                     YearOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime),MonthOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime));
-      if FileExists(vNomeArquivo) then
-        DeleteFile(vNomeArquivo);
-      mMDFe.SaveToFile(vNomeArquivo);
-    end;
-    //**************
-
-    //Salvar arquivo na pasta do PDF
-    if trim(fDMCadMDFe.qParametros_MDFeENDPDFMDFE.AsString) <> '' then
-    begin
-      vNomeArqPDF := Monta_Diretorio('P',fDMCadMDFe.qParametros_MDFeENDXMLMDFE.AsString,fDMCadMDFe.cdsMDFeSERIE.AsString,
-                     YearOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime),MonthOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime));
-      if FileExists(vNomeArqPDF) then
-        DeleteFile(vNomeArqPDF);
-      prc_Imprimir_Danfe('E');
-    end;
-    //**************
-
-    prc_Consultar(fDMCadMDFe.cdsMDFeID.AsInteger);
-
-    //sXml := TStringStream.Create('');
-    //try
-      //Xml.Position := 0;
-      //Xml.SaveToStream(sXml);
-
-      //mmoMDFeRetorno.Lines.Add('Buscar Situação: ' + recibo);
-      //mmoMDFeRetorno.Lines.Add( FormatXMLData(sXml.DataString) );
-      //mmoMDFeRetorno.Lines.Add('----------------------------------------------------------------------------');
-    //finally
-      //FreeAndNil(sXml);
-    //end;
-  finally
-    FreeAndNil(mMDFe);
-    FreeAndNil(Xml);
-    FreeAndNil(sProtocolo);
-  end;
 end;
 
 procedure TfrmCadMDFe.prc_Gravar_Envio;
@@ -2217,7 +2143,7 @@ begin
   begin
     ckSalvarXML.Caption := ExtractFilePath(Application.ExeName) + 'Temp\';
     ckSalvarXML.Visible := not(ckSalvarXML.Visible);
-    btnBuscar.Visible   := not(btnBuscar.Visible);
+    btnOutros.Visible   := not(btnOutros.Visible);
   end;
 end;
 
@@ -2288,6 +2214,93 @@ begin
     DBEdit2.ReadOnly := True;
     DBEdit2.Color    := clSilver;
   end;
+end;
+
+procedure TfrmCadMDFe.Buscar1Click(Sender: TObject);
+var
+  recibo, protocolo: string;
+  Xml: TMemoryStream;
+  //sXml: TStringStream;
+  vCNPjAux: String;
+  sProtocolo: TStringList;
+  vArq: String;
+begin
+  if vRecibo_MDFe <> '' then
+    recibo := vRecibo_MDFe
+  else
+    recibo := InputBox('Informe o recibo', 'Recibo', '');
+  if trim(recibo) = '' then
+    exit;
+
+  Xml := TMemoryStream.Create;
+  try
+    sProtocolo := TStringList.Create;
+    sProtocolo.Delimiter := '|';
+    vCNPjAux := Monta_Numero(fDMCadMDFe.cdsFilialCNPJ_CPF.AsString,0);
+    sProtocolo.DelimitedText := MDFe_Buscar(fnc_LocalServidorNFe_Local,
+                                   vCNPjAux  ,
+                                   recibo,
+                                   mMDFe,
+                                   Xml);
+
+    vProtocolo_MDFe   := sProtocolo[0];
+    vDtProtocolo_MDFe := sProtocolo[1];
+
+    mMDFe.Position := 0;
+    Xml.SaveToStream(mMDFe);
+
+    prc_gravar_Busca;
+
+    fDMCadMDFe.prc_Localizar(fDMCadMDFe.cdsConsultaID.AsInteger);
+
+    //Salvar arquivo na pasta do XML
+    if trim(fDMCadMDFe.qParametros_MDFeENDXMLMDFE.AsString) <> '' then
+    begin
+      vNomeArquivo := Monta_Diretorio('X',fDMCadMDFe.qParametros_MDFeENDXMLMDFE.AsString,fDMCadMDFe.cdsMDFeSERIE.AsString,
+                     YearOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime),MonthOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime));
+      if FileExists(vNomeArquivo) then
+        DeleteFile(vNomeArquivo);
+      mMDFe.SaveToFile(vNomeArquivo);
+    end;
+    //**************
+
+    //Salvar arquivo na pasta do PDF
+    if trim(fDMCadMDFe.qParametros_MDFeENDPDFMDFE.AsString) <> '' then
+    begin
+      vNomeArqPDF := Monta_Diretorio('P',fDMCadMDFe.qParametros_MDFeENDXMLMDFE.AsString,fDMCadMDFe.cdsMDFeSERIE.AsString,
+                     YearOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime),MonthOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime));
+      if FileExists(vNomeArqPDF) then
+        DeleteFile(vNomeArqPDF);
+      prc_Imprimir_Danfe('E');
+    end;
+    //**************
+
+    prc_Consultar(fDMCadMDFe.cdsMDFeID.AsInteger);
+
+    //sXml := TStringStream.Create('');
+    //try
+      //Xml.Position := 0;
+      //Xml.SaveToStream(sXml);
+
+      //mmoMDFeRetorno.Lines.Add('Buscar Situação: ' + recibo);
+      //mmoMDFeRetorno.Lines.Add( FormatXMLData(sXml.DataString) );
+      //mmoMDFeRetorno.Lines.Add('----------------------------------------------------------------------------');
+    //finally
+      //FreeAndNil(sXml);
+    //end;
+  finally
+    FreeAndNil(mMDFe);
+    FreeAndNil(Xml);
+    FreeAndNil(sProtocolo);
+  end;
+end;
+
+procedure TfrmCadMDFe.Encerrar1Click(Sender: TObject);
+begin
+  frmEncerrar_MDFe := TfrmEncerrar_MDFe.Create(self);
+  frmEncerrar_MDFe.fDMCadMDFe := fDMCadMDFe;
+  frmEncerrar_MDFe.ShowModal;
+  FreeAndNil(frmEncerrar_MDFe);
 end;
 
 end.

@@ -32,7 +32,8 @@ uses
   UCadMDFe_Enc in 'UCadMDFe_Enc.pas' {frmCadMDFe_Enc},
   UCadMDFe_Condutor in 'UCadMDFe_Condutor.pas' {frmCadMDFe_Condutor},
   DmdDatabase_NFeBD in '..\ssfacil\DmdDatabase_NFeBD.pas' {dmDatabase_NFeBD: TDataModule},
-  uNFeConsts in '..\ssfacil\uNFeConsts.pas';
+  uNFeConsts in '..\ssfacil\uNFeConsts.pas',
+  UEncerrar_MDFe in 'UEncerrar_MDFe.pas' {frmEncerrar_MDFe};
 
 {$R *.res}
 
