@@ -2481,7 +2481,7 @@ object DMCadMDFe: TDMCadMDFe
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 664
+    Left = 665
     Top = 8
   end
   object dspCondutor: TDataSetProvider

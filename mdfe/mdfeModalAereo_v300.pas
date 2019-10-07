@@ -1,13 +1,12 @@
 
-{*****************************************************************************************************************}
-{                                                                                                                 }
-{                                                XML Data Binding                                                 }
-{                                                                                                                 }
-{         Generated on: 16/03/2017 09:06:11                                                                       }
-{       Generated from: E:\pessoal\!desenvolvimento\cleomar\FlexDocs\MDFe_Util\Schemas\mdfeModalAereo_v3.00.xsd   }
-{   Settings stored in: E:\pessoal\!desenvolvimento\cleomar\FlexDocs\MDFe_Util\Schemas\mdfeModalAereo_v3.00.xdb   }
-{                                                                                                                 }
-{*****************************************************************************************************************}
+{*****************************************************************************************************************************************}
+{                                                                                                                                         }
+{                                                            XML Data Binding                                                             }
+{                                                                                                                                         }
+{         Generated on: 26/09/2019 09:16:27                                                                                               }
+{       Generated from: C:\Users\edson.alanis\Google Drive\!desenvolvimento\cleomar\FlexDocs\MDFe_Util\Schemas\mdfeModalAereo_v3.00.xsd   }
+{                                                                                                                                         }
+{*****************************************************************************************************************************************}
 
 unit mdfeModalAereo_v300;
 
@@ -24,7 +23,7 @@ type
 { IXMLAereo }
 
   IXMLAereo = interface(IXMLNode)
-    ['{93E67F4A-A479-4FB8-B4BF-413444EF705D}']
+    ['{D0FEBC44-7CF5-4660-B7CD-3B031C97EC6E}']
     { Property Accessors }
     function Get_Nac: WideString;
     function Get_Matr: WideString;
@@ -80,6 +79,8 @@ const
   TargetNamespace = 'http://www.portalfiscal.inf.br/mdfe';
 
 implementation
+
+uses xmlutil;
 
 { Global Functions }
 

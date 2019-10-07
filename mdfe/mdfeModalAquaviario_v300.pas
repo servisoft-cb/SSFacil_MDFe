@@ -1,12 +1,12 @@
 
-{**********************************************************************************************************************}
-{                                                                                                                      }
-{                                                   XML Data Binding                                                   }
-{                                                                                                                      }
-{         Generated on: 16/03/2017 09:21:09                                                                            }
-{       Generated from: E:\pessoal\!desenvolvimento\cleomar\FlexDocs\MDFe_Util\Schemas\mdfeModalAquaviario_v3.00.xsd   }
-{                                                                                                                      }
-{**********************************************************************************************************************}
+{**********************************************************************************************************************************************}
+{                                                                                                                                              }
+{                                                               XML Data Binding                                                               }
+{                                                                                                                                              }
+{         Generated on: 26/09/2019 09:30:19                                                                                                    }
+{       Generated from: C:\Users\edson.alanis\Google Drive\!desenvolvimento\cleomar\FlexDocs\MDFe_Util\Schemas\mdfeModalAquaviario_v3.00.xsd   }
+{                                                                                                                                              }
+{**********************************************************************************************************************************************}
 
 unit mdfeModalAquaviario_v300;
 
@@ -34,7 +34,7 @@ type
 { IXMLAquav }
 
   IXMLAquav = interface(IXMLNode)
-    ['{631115D6-FF93-4F31-816D-489CCB4E5BDC}']
+    ['{07953126-3575-45FB-8641-9A7CD14678F6}']
     { Property Accessors }
     function Get_Irin: WideString;
     function Get_TpEmb: WideString;
@@ -79,7 +79,7 @@ type
 { IXMLAquav_infTermCarreg }
 
   IXMLAquav_infTermCarreg = interface(IXMLNode)
-    ['{BBBD240F-A8C7-4DAD-862C-04F01E448D40}']
+    ['{062A30D1-FAE7-4A65-815F-ED224571B472}']
     { Property Accessors }
     function Get_CTermCarreg: WideString;
     function Get_XTermCarreg: WideString;
@@ -93,7 +93,7 @@ type
 { IXMLAquav_infTermCarregList }
 
   IXMLAquav_infTermCarregList = interface(IXMLNodeCollection)
-    ['{D91099DC-2C8B-4701-9906-8F9F96972891}']
+    ['{097CA7E5-CB5B-4D38-AE28-F81DEB29034B}']
     { Methods & Properties }
     function Add: IXMLAquav_infTermCarreg;
     function Insert(const Index: Integer): IXMLAquav_infTermCarreg;
@@ -105,7 +105,7 @@ type
 { IXMLAquav_infTermDescarreg }
 
   IXMLAquav_infTermDescarreg = interface(IXMLNode)
-    ['{43F8D74A-C262-4995-B9A7-FA5BBE26DB8C}']
+    ['{BC27BD58-323A-4112-8F0A-30D7EAA6F159}']
     { Property Accessors }
     function Get_CTermDescarreg: WideString;
     function Get_XTermDescarreg: WideString;
@@ -119,7 +119,7 @@ type
 { IXMLAquav_infTermDescarregList }
 
   IXMLAquav_infTermDescarregList = interface(IXMLNodeCollection)
-    ['{56B44E16-90BE-4AE0-B76A-9463A9C5B5A5}']
+    ['{83A4E849-51FA-4ECA-88CB-8A58F3126E4F}']
     { Methods & Properties }
     function Add: IXMLAquav_infTermDescarreg;
     function Insert(const Index: Integer): IXMLAquav_infTermDescarreg;
@@ -131,7 +131,7 @@ type
 { IXMLAquav_infEmbComb }
 
   IXMLAquav_infEmbComb = interface(IXMLNode)
-    ['{43DB7D0F-761A-452C-A482-A30D30148386}']
+    ['{6FEC7CAB-B48B-40A6-BC81-6E6A470F0BEF}']
     { Property Accessors }
     function Get_CEmbComb: WideString;
     function Get_XBalsa: WideString;
@@ -145,7 +145,7 @@ type
 { IXMLAquav_infEmbCombList }
 
   IXMLAquav_infEmbCombList = interface(IXMLNodeCollection)
-    ['{71A1114B-D355-425B-8F9B-2DE22E599AF5}']
+    ['{4D9CEED6-66C6-421D-A70C-D5BA806D8ADE}']
     { Methods & Properties }
     function Add: IXMLAquav_infEmbComb;
     function Insert(const Index: Integer): IXMLAquav_infEmbComb;
@@ -157,7 +157,7 @@ type
 { IXMLAquav_infUnidCargaVazia }
 
   IXMLAquav_infUnidCargaVazia = interface(IXMLNode)
-    ['{DBBE25F5-489D-49D1-87FC-9B63AEA53DBC}']
+    ['{8C560CAB-F9CD-4234-BFD7-464A91A0BB24}']
     { Property Accessors }
     function Get_IdUnidCargaVazia: WideString;
     function Get_TpUnidCargaVazia: WideString;
@@ -171,7 +171,7 @@ type
 { IXMLAquav_infUnidCargaVaziaList }
 
   IXMLAquav_infUnidCargaVaziaList = interface(IXMLNodeCollection)
-    ['{A1BB2A82-DE75-4B85-B3A8-CD0599A91B8B}']
+    ['{DE5AB632-FA58-494D-887A-1091EC8A4F80}']
     { Methods & Properties }
     function Add: IXMLAquav_infUnidCargaVazia;
     function Insert(const Index: Integer): IXMLAquav_infUnidCargaVazia;
@@ -183,7 +183,7 @@ type
 { IXMLAquav_infUnidTranspVazia }
 
   IXMLAquav_infUnidTranspVazia = interface(IXMLNode)
-    ['{539399B6-DEA0-4B7B-82B3-50A0535B6037}']
+    ['{0FAD554D-D5D1-4865-B9D8-6DC0B43EFAB8}']
     { Property Accessors }
     function Get_IdUnidTranspVazia: WideString;
     function Get_TpUnidTranspVazia: WideString;
@@ -197,7 +197,7 @@ type
 { IXMLAquav_infUnidTranspVaziaList }
 
   IXMLAquav_infUnidTranspVaziaList = interface(IXMLNodeCollection)
-    ['{32B66E7B-5244-4FB7-B4E8-D84CA7E1B1AA}']
+    ['{0DEC4E1D-93CE-4AEB-8E0A-2EA24A79F716}']
     { Methods & Properties }
     function Add: IXMLAquav_infUnidTranspVazia;
     function Insert(const Index: Integer): IXMLAquav_infUnidTranspVazia;
@@ -209,7 +209,7 @@ type
 { IXMLNAverList }
 
   IXMLNAverList = interface(IXMLNodeCollection)
-    ['{EC253846-3FCA-4FDF-9739-188F32BF802E}']
+    ['{1CECD955-DA07-44BF-89E7-2BDB21E40BC5}']
     { Methods & Properties }
     function Add(const Value: WideString): IXMLNode;
     function Insert(const Index: Integer; const Value: WideString): IXMLNode;
@@ -392,7 +392,35 @@ type
     function Get_Item(Index: Integer): WideString;
   end;
 
+{ Global Functions }
+
+function Getaquav(Doc: IXMLDocument): IXMLAquav;
+function Loadaquav(const FileName: string): IXMLAquav;
+function Newaquav: IXMLAquav;
+
+const
+  TargetNamespace = 'http://www.portalfiscal.inf.br/mdfe';
+
 implementation
+
+uses xmlutil;
+
+{ Global Functions }
+
+function Getaquav(Doc: IXMLDocument): IXMLAquav;
+begin
+  Result := Doc.GetDocBinding('aquav', TXMLAquav, TargetNamespace) as IXMLAquav;
+end;
+
+function Loadaquav(const FileName: string): IXMLAquav;
+begin
+  Result := LoadXMLDocument(FileName).GetDocBinding('aquav', TXMLAquav, TargetNamespace) as IXMLAquav;
+end;
+
+function Newaquav: IXMLAquav;
+begin
+  Result := NewXMLDocument.GetDocBinding('aquav', TXMLAquav, TargetNamespace) as IXMLAquav;
+end;
 
 { TXMLAquav }
 

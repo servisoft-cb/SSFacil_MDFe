@@ -1,12 +1,12 @@
 
-{***********************************************************************************************************************}
-{                                                                                                                       }
-{                                                   XML Data Binding                                                    }
-{                                                                                                                       }
-{         Generated on: 16/03/2017 09:07:14                                                                             }
-{       Generated from: E:\pessoal\!desenvolvimento\cleomar\FlexDocs\MDFe_Util\Schemas\mdfeModalFerroviario_v3.00.xsd   }
-{                                                                                                                       }
-{***********************************************************************************************************************}
+{***********************************************************************************************************************************************}
+{                                                                                                                                               }
+{                                                               XML Data Binding                                                                }
+{                                                                                                                                               }
+{         Generated on: 26/09/2019 09:17:28                                                                                                     }
+{       Generated from: C:\Users\edson.alanis\Google Drive\!desenvolvimento\cleomar\FlexDocs\MDFe_Util\Schemas\mdfeModalFerroviario_v3.00.xsd   }
+{                                                                                                                                               }
+{***********************************************************************************************************************************************}
 
 unit mdfeModalFerroviario_v300;
 
@@ -26,7 +26,7 @@ type
 { IXMLFerrov }
 
   IXMLFerrov = interface(IXMLNode)
-    ['{19599314-02D6-48B8-99A9-EC1C2271C3FA}']
+    ['{014DFC5A-5E61-4420-B6D3-8C114DBE3ECE}']
     { Property Accessors }
     function Get_Trem: IXMLFerrov_trem;
     function Get_Vag: IXMLFerrov_vagList;
@@ -38,7 +38,7 @@ type
 { IXMLFerrov_trem }
 
   IXMLFerrov_trem = interface(IXMLNode)
-    ['{00469190-601A-497E-BD09-66E06F3E8717}']
+    ['{02218BC4-7AB3-4378-974F-DD1855741BD8}']
     { Property Accessors }
     function Get_XPref: WideString;
     function Get_DhTrem: WideString;
@@ -61,7 +61,7 @@ type
 { IXMLFerrov_vag }
 
   IXMLFerrov_vag = interface(IXMLNode)
-    ['{148F720B-A5DC-444F-B611-6B93E69BC8C2}']
+    ['{D2CD2F71-CCE9-40A3-B88F-6710B524ABFD}']
     { Property Accessors }
     function Get_PesoBC: WideString;
     function Get_PesoR: WideString;
@@ -90,7 +90,7 @@ type
 { IXMLFerrov_vagList }
 
   IXMLFerrov_vagList = interface(IXMLNodeCollection)
-    ['{28D34430-6034-4F18-A867-B777DDFAB630}']
+    ['{C2B6DBCC-9EB0-41E1-908A-A5F657600F6F}']
     { Methods & Properties }
     function Add: IXMLFerrov_vag;
     function Insert(const Index: Integer): IXMLFerrov_vag;
@@ -108,7 +108,7 @@ type
 
 { TXMLFerrov }
 
-  TXMLFerrov = class(TXMLNode, IXMLFerrov )
+  TXMLFerrov = class(TXMLNode, IXMLFerrov)
   private
     FVag: IXMLFerrov_vagList;
   protected
@@ -178,6 +178,8 @@ const
   TargetNamespace = 'http://www.portalfiscal.inf.br/mdfe';
 
 implementation
+
+uses xmlutil;
 
 { Global Functions }
 

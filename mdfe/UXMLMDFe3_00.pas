@@ -45,6 +45,7 @@ var
   vCodUF: String;
   vAno, vMes: String;
   Texto: String;
+  vQRCode: WideString;
 begin
   fDMEnvio.qFilial.Close;
   fDMEnvio.qFilial.ParamByName('ID').AsInteger := fDMEnvio.cdsMDFeFILIAL.AsInteger;
@@ -100,7 +101,7 @@ begin
     vHrEmissaoNFe := fDMEnvio.cdsMDFeHREMISSAO.AsDateTime
   else
     vHrEmissaoNFe := Now;
-  Texto := '';  
+  Texto := '';
   if uUtilPadrao.fnc_HorarioVerao then
   begin
     if trim(fDMEnvio.qParametrosFUSOHORARIO_VERAO.AsString) <> '' then
@@ -274,6 +275,13 @@ begin
   //enviMDFe.MDFe.InfMDFe.InfAdic.InfAdFisco := 'Informacoes de Adcionais do Fisco. Operacao nao tributada.';
   if trim(fDMEnvio.cdsMDFeINF_ADICIONAIS.Value) <> '' then
     enviMDFe.MDFe.InfMDFe.InfAdic.InfCpl := TirarAcento(fDMEnvio.cdsMDFeINF_ADICIONAIS.Value);
+
+
+  vQRCode := MDFe_GerarQRCodeURL(fnc_LocalServidorNFe(fDMEnvio),
+                                 vCNPJEmit,
+                                 'https://dfe-portal.svrs.rs.gov.br/mdfe/qrCode',
+                                 vChaveAcesso_MDFe);
+  enviMDFe.MDFe.InfMDFeSupl.QrCodMDFe := vQRCode;
 
   Result := FormatXMLData( '<?xml version="1.0" encoding="UTF-8"?>' + enviMDFe.MDFe.XML );
 end;

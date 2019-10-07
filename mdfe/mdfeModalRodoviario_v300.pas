@@ -1,12 +1,12 @@
 
-{**********************************************************************************************************************}
-{                                                                                                                      }
-{                                                   XML Data Binding                                                   }
-{                                                                                                                      }
-{         Generated on: 16/03/2017 09:07:35                                                                            }
-{       Generated from: E:\pessoal\!desenvolvimento\cleomar\FlexDocs\MDFe_Util\Schemas\mdfeModalRodoviario_v3.00.xsd   }
-{                                                                                                                      }
-{**********************************************************************************************************************}
+{**********************************************************************************************************************************************}
+{                                                                                                                                              }
+{                                                               XML Data Binding                                                               }
+{                                                                                                                                              }
+{         Generated on: 26/09/2019 09:15:51                                                                                                    }
+{       Generated from: C:\Users\edson.alanis\Google Drive\!desenvolvimento\cleomar\FlexDocs\MDFe_Util\Schemas\mdfeModalRodoviario_v3.00.xsd   }
+{                                                                                                                                              }
+{**********************************************************************************************************************************************}
 
 unit mdfeModalRodoviario_v300;
 
@@ -39,7 +39,7 @@ type
 { IXMLRodo }
 
   IXMLRodo = interface(IXMLNode)
-    ['{25BA4835-E7A6-4313-B221-2DF020D7D808}']
+    ['{E57BB17F-0397-433A-B9F9-76782CCEDFF5}']
     { Property Accessors }
     function Get_InfANTT: IXMLRodo_infANTT;
     function Get_VeicTracao: IXMLRodo_veicTracao;
@@ -58,7 +58,7 @@ type
 { IXMLRodo_infANTT }
 
   IXMLRodo_infANTT = interface(IXMLNode)
-    ['{9E02BAB4-8ED2-4085-AF0E-BAB5158BE6E4}']
+    ['{9BAD0B50-A606-4123-BCF1-7C8EB474A9BD}']
     { Property Accessors }
     function Get_RNTRC: WideString;
     function Get_InfCIOT: IXMLRodo_infANTT_infCIOTList;
@@ -75,7 +75,7 @@ type
 { IXMLRodo_infANTT_infCIOT }
 
   IXMLRodo_infANTT_infCIOT = interface(IXMLNode)
-    ['{201FD468-ED40-4E4F-BC06-4C71165640E2}']
+    ['{BB246EF0-6D3F-41B7-B01B-A8496FCD5F42}']
     { Property Accessors }
     function Get_CIOT: WideString;
     function Get_CPF: WideString;
@@ -92,7 +92,7 @@ type
 { IXMLRodo_infANTT_infCIOTList }
 
   IXMLRodo_infANTT_infCIOTList = interface(IXMLNodeCollection)
-    ['{023B26CA-126E-4D72-9931-D3DA413C4FBF}']
+    ['{5D529615-7228-45C9-9CB8-98D2663DDA22}']
     { Methods & Properties }
     function Add: IXMLRodo_infANTT_infCIOT;
     function Insert(const Index: Integer): IXMLRodo_infANTT_infCIOT;
@@ -104,7 +104,7 @@ type
 { IXMLRodo_infANTT_valePed }
 
   IXMLRodo_infANTT_valePed = interface(IXMLNodeCollection)
-    ['{85ADEC6E-4185-407F-A36A-21372F2E9556}']
+    ['{8E053749-CE5B-434C-8FA4-10222921A578}']
     { Property Accessors }
     function Get_Disp(Index: Integer): IXMLRodo_infANTT_valePed_disp;
     { Methods & Properties }
@@ -116,7 +116,7 @@ type
 { IXMLRodo_infANTT_valePed_disp }
 
   IXMLRodo_infANTT_valePed_disp = interface(IXMLNode)
-    ['{C4701A72-8D25-4542-9418-AB82518FB022}']
+    ['{CE6341EB-E7FF-4A1A-82AE-BF9272DED132}']
     { Property Accessors }
     function Get_CNPJForn: WideString;
     function Get_CNPJPg: WideString;
@@ -139,7 +139,7 @@ type
 { IXMLRodo_infANTT_infContratante }
 
   IXMLRodo_infANTT_infContratante = interface(IXMLNode)
-    ['{8BF854D5-276C-4693-8E63-FF8C9FD0A55C}']
+    ['{CE1DA86A-1F25-45B6-898D-926CB27CAB3E}']
     { Property Accessors }
     function Get_CPF: WideString;
     function Get_CNPJ: WideString;
@@ -153,7 +153,7 @@ type
 { IXMLRodo_infANTT_infContratanteList }
 
   IXMLRodo_infANTT_infContratanteList = interface(IXMLNodeCollection)
-    ['{E283E202-B585-418B-9627-F6335D49A737}']
+    ['{874DCEC8-A175-4D7D-8B05-BBF076267456}']
     { Methods & Properties }
     function Add: IXMLRodo_infANTT_infContratante;
     function Insert(const Index: Integer): IXMLRodo_infANTT_infContratante;
@@ -165,7 +165,7 @@ type
 { IXMLRodo_veicTracao }
 
   IXMLRodo_veicTracao = interface(IXMLNode)
-    ['{59DBE891-B0B6-466C-95DD-2498BC4F55D1}']
+    ['{C1723FD3-DB6A-41AB-AD72-07D578AE9543}']
     { Property Accessors }
     function Get_CInt: WideString;
     function Get_Placa: WideString;
@@ -204,7 +204,7 @@ type
 { IXMLRodo_veicTracao_prop }
 
   IXMLRodo_veicTracao_prop = interface(IXMLNode)
-    ['{0569D174-1CFE-4D5B-8D87-5BAF08505FD2}']
+    ['{252389AB-FFB7-477B-8B28-84F9C55BEA6C}']
     { Property Accessors }
     function Get_CPF: WideString;
     function Get_CNPJ: WideString;
@@ -233,7 +233,7 @@ type
 { IXMLRodo_veicTracao_condutor }
 
   IXMLRodo_veicTracao_condutor = interface(IXMLNode)
-    ['{75619D9D-EE85-4A66-A247-28AFE106D723}']
+    ['{F1B149E3-29A1-49BC-BE66-079AC5B8DEE1}']
     { Property Accessors }
     function Get_XNome: WideString;
     function Get_CPF: WideString;
@@ -247,7 +247,7 @@ type
 { IXMLRodo_veicTracao_condutorList }
 
   IXMLRodo_veicTracao_condutorList = interface(IXMLNodeCollection)
-    ['{E5744DEB-B751-4E8D-AD8F-84992C1863DC}']
+    ['{705E5950-A04D-4381-972F-901B8342DE9C}']
     { Methods & Properties }
     function Add: IXMLRodo_veicTracao_condutor;
     function Insert(const Index: Integer): IXMLRodo_veicTracao_condutor;
@@ -259,7 +259,7 @@ type
 { IXMLRodo_veicReboque }
 
   IXMLRodo_veicReboque = interface(IXMLNode)
-    ['{D3618BC7-D7B6-451C-B4A9-5084FF9FD312}']
+    ['{9C744D8C-49C8-4E46-BFA5-5346AAD0F045}']
     { Property Accessors }
     function Get_CInt: WideString;
     function Get_Placa: WideString;
@@ -293,7 +293,7 @@ type
 { IXMLRodo_veicReboqueList }
 
   IXMLRodo_veicReboqueList = interface(IXMLNodeCollection)
-    ['{0B2742C1-3B2C-4A07-A1DB-7379F4A1F958}']
+    ['{040C295A-F07F-4F5E-B9AB-9C1464F708A2}']
     { Methods & Properties }
     function Add: IXMLRodo_veicReboque;
     function Insert(const Index: Integer): IXMLRodo_veicReboque;
@@ -305,7 +305,7 @@ type
 { IXMLRodo_veicReboque_prop }
 
   IXMLRodo_veicReboque_prop = interface(IXMLNode)
-    ['{CE3270EB-94F2-40D3-8AE0-3829FCD975BB}']
+    ['{777031F3-2271-4FE4-810D-D6A1F513589D}']
     { Property Accessors }
     function Get_CPF: WideString;
     function Get_CNPJ: WideString;
@@ -334,7 +334,7 @@ type
 { IXMLRodo_lacRodo }
 
   IXMLRodo_lacRodo = interface(IXMLNode)
-    ['{EC6EFE4E-AA98-4864-929E-FDA7299AE5D5}']
+    ['{D9B655ED-2332-4876-868B-94AAFD1D8C6C}']
     { Property Accessors }
     function Get_NLacre: WideString;
     procedure Set_NLacre(Value: WideString);
@@ -345,7 +345,7 @@ type
 { IXMLRodo_lacRodoList }
 
   IXMLRodo_lacRodoList = interface(IXMLNodeCollection)
-    ['{D33540AF-B9F2-4D6E-8E7E-F00E736576F4}']
+    ['{DA5426D2-68C2-4776-BE6D-15E6D7CA2014}']
     { Methods & Properties }
     function Add: IXMLRodo_lacRodo;
     function Insert(const Index: Integer): IXMLRodo_lacRodo;
@@ -646,6 +646,8 @@ const
   TargetNamespace = 'http://www.portalfiscal.inf.br/mdfe';
 
 implementation
+
+uses xmlutil;
 
 { Global Functions }
 

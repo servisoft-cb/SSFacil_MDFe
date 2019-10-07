@@ -1,13 +1,12 @@
 
-{***********************************************************************************************************}
-{                                                                                                           }
-{                                             XML Data Binding                                              }
-{                                                                                                           }
-{         Generated on: 16/03/2017 09:33:47                                                                 }
-{       Generated from: E:\pessoal\!desenvolvimento\cleomar\FlexDocs\MDFe_Util\Schemas\enviMDFe_v3.00.xsd   }
-{   Settings stored in: E:\pessoal\!desenvolvimento\cleomar\FlexDocs\MDFe_Util\Schemas\enviMDFe_v3.00.xdb   }
-{                                                                                                           }
-{***********************************************************************************************************}
+{***********************************************************************************************************************************}
+{                                                                                                                                   }
+{                                                         XML Data Binding                                                          }
+{                                                                                                                                   }
+{         Generated on: 26/09/2019 09:12:45                                                                                         }
+{       Generated from: C:\Users\edson.alanis\Google Drive\!desenvolvimento\cleomar\FlexDocs\MDFe_Util\Schemas\enviMDFe_v3.00.xsd   }
+{                                                                                                                                   }
+{***********************************************************************************************************************************}
 
 unit enviMDFe_v300;
 
@@ -44,6 +43,7 @@ type
   IXMLLacUnidCargaList = interface;
   IXMLPeri = interface;
   IXMLPeriList = interface;
+  IXMLInfEntregaParcial = interface;
   IXMLInfNFe = interface;
   IXMLInfNFeList = interface;
   IXMLInfMDFeTransp = interface;
@@ -58,6 +58,8 @@ type
   IXMLAutXML = interface;
   IXMLAutXMLList = interface;
   IXMLInfAdic = interface;
+  IXMLTRespTec = interface;
+  IXMLInfMDFeSupl = interface;
   IXMLSignatureType_ds = interface;
   IXMLSignedInfoType_ds = interface;
   IXMLCanonicalizationMethod_ds = interface;
@@ -69,6 +71,10 @@ type
   IXMLSignatureValueType_ds = interface;
   IXMLKeyInfoType_ds = interface;
   IXMLX509DataType_ds = interface;
+  IXMLTRetMDFe = interface;
+  IXMLTProtMDFe = interface;
+  IXMLInfProt = interface;
+  IXMLInfFisco = interface;
   IXMLTRetEnviMDFe = interface;
   IXMLInfRec = interface;
   IXMLTEndereco = interface;
@@ -86,7 +92,7 @@ type
 { IXMLTEnviMDFe }
 
   IXMLTEnviMDFe = interface(IXMLNode)
-    ['{1B48263B-E120-44FD-BDFA-64EA807D0262}']
+    ['{C80826E7-9022-49C3-BE5E-FED81CF81754}']
     { Property Accessors }
     function Get_Versao: WideString;
     function Get_IdLote: WideString;
@@ -102,19 +108,21 @@ type
 { IXMLTMDFe }
 
   IXMLTMDFe = interface(IXMLNode)
-    ['{51E6C7C4-49D4-42AD-9BF5-75AE0CBECB43}']
+    ['{D4AA6968-F9B2-4E13-B248-21D82AFAF86C}']
     { Property Accessors }
     function Get_InfMDFe: IXMLInfMDFe;
+    function Get_InfMDFeSupl: IXMLInfMDFeSupl;
     function Get_Signature: IXMLSignatureType_ds;
     { Methods & Properties }
     property InfMDFe: IXMLInfMDFe read Get_InfMDFe;
+    property InfMDFeSupl: IXMLInfMDFeSupl read Get_InfMDFeSupl;
     property Signature: IXMLSignatureType_ds read Get_Signature;
   end;
 
 { IXMLInfMDFe }
 
   IXMLInfMDFe = interface(IXMLNode)
-    ['{D797FDA4-D21C-4EA8-B633-660CE2E124E3}']
+    ['{B0CB5E13-4AFA-4BD2-B307-E0F090357A91}']
     { Property Accessors }
     function Get_Versao: WideString;
     function Get_Id: WideString;
@@ -127,6 +135,7 @@ type
     function Get_Lacres: IXMLLacresList;
     function Get_AutXML: IXMLAutXMLList;
     function Get_InfAdic: IXMLInfAdic;
+    function Get_InfRespTec: IXMLTRespTec;
     procedure Set_Versao(Value: WideString);
     procedure Set_Id(Value: WideString);
     { Methods & Properties }
@@ -141,12 +150,13 @@ type
     property Lacres: IXMLLacresList read Get_Lacres;
     property AutXML: IXMLAutXMLList read Get_AutXML;
     property InfAdic: IXMLInfAdic read Get_InfAdic;
+    property InfRespTec: IXMLTRespTec read Get_InfRespTec;
   end;
 
 { IXMLIde }
 
   IXMLIde = interface(IXMLNode)
-    ['{F175BB58-BCD2-468B-974B-078CDE790952}']
+    ['{0703D9EB-0079-4407-B03C-CE127033F097}']
     { Property Accessors }
     function Get_CUF: WideString;
     function Get_TpAmb: WideString;
@@ -167,6 +177,8 @@ type
     function Get_InfMunCarrega: IXMLInfMunCarregaList;
     function Get_InfPercurso: IXMLInfPercursoList;
     function Get_DhIniViagem: WideString;
+    function Get_IndCanalVerde: WideString;
+    function Get_IndCarregaPosterior: WideString;
     procedure Set_CUF(Value: WideString);
     procedure Set_TpAmb(Value: WideString);
     procedure Set_TpEmit(Value: WideString);
@@ -184,6 +196,8 @@ type
     procedure Set_UFIni(Value: WideString);
     procedure Set_UFFim(Value: WideString);
     procedure Set_DhIniViagem(Value: WideString);
+    procedure Set_IndCanalVerde(Value: WideString);
+    procedure Set_IndCarregaPosterior(Value: WideString);
     { Methods & Properties }
     property CUF: WideString read Get_CUF write Set_CUF;
     property TpAmb: WideString read Get_TpAmb write Set_TpAmb;
@@ -204,12 +218,14 @@ type
     property InfMunCarrega: IXMLInfMunCarregaList read Get_InfMunCarrega;
     property InfPercurso: IXMLInfPercursoList read Get_InfPercurso;
     property DhIniViagem: WideString read Get_DhIniViagem write Set_DhIniViagem;
+    property IndCanalVerde: WideString read Get_IndCanalVerde write Set_IndCanalVerde;
+    property IndCarregaPosterior: WideString read Get_IndCarregaPosterior write Set_IndCarregaPosterior;
   end;
 
 { IXMLInfMunCarrega }
 
   IXMLInfMunCarrega = interface(IXMLNode)
-    ['{82297F63-5E27-4E8A-8F14-E6D4351AED16}']
+    ['{18D34B78-7C14-4B6E-8286-850CAAB592B9}']
     { Property Accessors }
     function Get_CMunCarrega: WideString;
     function Get_XMunCarrega: WideString;
@@ -223,7 +239,7 @@ type
 { IXMLInfMunCarregaList }
 
   IXMLInfMunCarregaList = interface(IXMLNodeCollection)
-    ['{A4F3A9BB-54CC-4276-B7EB-6AA318540B73}']
+    ['{4ACC4361-7635-4A1C-AB5A-4EB397FEE564}']
     { Methods & Properties }
     function Add: IXMLInfMunCarrega;
     function Insert(const Index: Integer): IXMLInfMunCarrega;
@@ -235,7 +251,7 @@ type
 { IXMLInfPercurso }
 
   IXMLInfPercurso = interface(IXMLNode)
-    ['{F1CE2165-6763-4AB7-BD67-D847C855706E}']
+    ['{FEFD56C7-2144-4A93-8FFF-F0507C4C1236}']
     { Property Accessors }
     function Get_UFPer: WideString;
     procedure Set_UFPer(Value: WideString);
@@ -246,7 +262,7 @@ type
 { IXMLInfPercursoList }
 
   IXMLInfPercursoList = interface(IXMLNodeCollection)
-    ['{A5426A9A-B34E-4341-8ED0-EDBF09AEC7DB}']
+    ['{DD506AA8-DF77-4C48-AF82-B3EE30033793}']
     { Methods & Properties }
     function Add: IXMLInfPercurso;
     function Insert(const Index: Integer): IXMLInfPercurso;
@@ -258,19 +274,22 @@ type
 { IXMLEmit }
 
   IXMLEmit = interface(IXMLNode)
-    ['{C20C7BE3-72CE-4E48-ACC3-17CD5373B4A9}']
+    ['{38A9FB3D-59D4-4E29-9507-5B0816A50DB0}']
     { Property Accessors }
     function Get_CNPJ: WideString;
+    function Get_CPF: WideString;
     function Get_IE: WideString;
     function Get_XNome: WideString;
     function Get_XFant: WideString;
     function Get_EnderEmit: IXMLTEndeEmi;
     procedure Set_CNPJ(Value: WideString);
+    procedure Set_CPF(Value: WideString);
     procedure Set_IE(Value: WideString);
     procedure Set_XNome(Value: WideString);
     procedure Set_XFant(Value: WideString);
     { Methods & Properties }
     property CNPJ: WideString read Get_CNPJ write Set_CNPJ;
+    property CPF: WideString read Get_CPF write Set_CPF;
     property IE: WideString read Get_IE write Set_IE;
     property XNome: WideString read Get_XNome write Set_XNome;
     property XFant: WideString read Get_XFant write Set_XFant;
@@ -280,7 +299,7 @@ type
 { IXMLTEndeEmi }
 
   IXMLTEndeEmi = interface(IXMLNode)
-    ['{C0F28880-965F-4671-84DD-0B469000F15F}']
+    ['{A3192FCA-38A6-4A5E-AA4C-C8D21D49A63A}']
     { Property Accessors }
     function Get_XLgr: WideString;
     function Get_Nro: WideString;
@@ -318,7 +337,7 @@ type
 { IXMLInfModal }
 
   IXMLInfModal = interface(IXMLNode)
-    ['{7DD84247-2F6E-42CF-B5DA-C651085251C5}']
+    ['{36F72D57-2476-4EB3-BC1A-601BBEC0FD27}']
     { Property Accessors }
     function Get_VersaoModal: WideString;
     procedure Set_VersaoModal(Value: WideString);
@@ -329,7 +348,7 @@ type
 { IXMLInfDoc }
 
   IXMLInfDoc = interface(IXMLNodeCollection)
-    ['{A328D745-6F90-4CC1-8FC2-9297822AE96C}']
+    ['{2384AB51-CF1F-417A-AF74-FB565D03DDE0}']
     { Property Accessors }
     function Get_InfMunDescarga(Index: Integer): IXMLInfMunDescarga;
     { Methods & Properties }
@@ -341,7 +360,7 @@ type
 { IXMLInfMunDescarga }
 
   IXMLInfMunDescarga = interface(IXMLNode)
-    ['{7A918BC4-E027-4FA1-8C9C-F210DBE8AF8D}']
+    ['{1FFC9E67-1838-4F15-B941-987EAD73B3C1}']
     { Property Accessors }
     function Get_CMunDescarga: WideString;
     function Get_XMunDescarga: WideString;
@@ -361,13 +380,14 @@ type
 { IXMLInfCTe }
 
   IXMLInfCTe = interface(IXMLNode)
-    ['{ACDB8051-FD47-4EA8-8D99-4936F17E8272}']
+    ['{C0B65EBC-9F3A-4937-B5F2-F7622065A730}']
     { Property Accessors }
     function Get_ChCTe: WideString;
     function Get_SegCodBarra: WideString;
     function Get_IndReentrega: WideString;
     function Get_InfUnidTransp: IXMLTUnidadeTranspList;
     function Get_Peri: IXMLPeriList;
+    function Get_InfEntregaParcial: IXMLInfEntregaParcial;
     procedure Set_ChCTe(Value: WideString);
     procedure Set_SegCodBarra(Value: WideString);
     procedure Set_IndReentrega(Value: WideString);
@@ -377,12 +397,13 @@ type
     property IndReentrega: WideString read Get_IndReentrega write Set_IndReentrega;
     property InfUnidTransp: IXMLTUnidadeTranspList read Get_InfUnidTransp;
     property Peri: IXMLPeriList read Get_Peri;
+    property InfEntregaParcial: IXMLInfEntregaParcial read Get_InfEntregaParcial;
   end;
 
 { IXMLInfCTeList }
 
   IXMLInfCTeList = interface(IXMLNodeCollection)
-    ['{A8E6C5CE-8F00-447C-8225-8223D6A48C8A}']
+    ['{92617478-3A87-4265-95B3-561A51231617}']
     { Methods & Properties }
     function Add: IXMLInfCTe;
     function Insert(const Index: Integer): IXMLInfCTe;
@@ -394,7 +415,7 @@ type
 { IXMLTUnidadeTransp }
 
   IXMLTUnidadeTransp = interface(IXMLNode)
-    ['{122AF738-2EA4-4F8A-A2C6-6DC43010BC51}']
+    ['{30963975-3C1B-4DA7-BF23-848213645813}']
     { Property Accessors }
     function Get_TpUnidTransp: WideString;
     function Get_IdUnidTransp: WideString;
@@ -415,7 +436,7 @@ type
 { IXMLTUnidadeTranspList }
 
   IXMLTUnidadeTranspList = interface(IXMLNodeCollection)
-    ['{C8417FA8-C129-407B-AC60-59C9A47E84D2}']
+    ['{C6022E91-9632-4CBA-A94B-60D5C3C1D934}']
     { Methods & Properties }
     function Add: IXMLTUnidadeTransp;
     function Insert(const Index: Integer): IXMLTUnidadeTransp;
@@ -427,7 +448,7 @@ type
 { IXMLLacUnidTransp }
 
   IXMLLacUnidTransp = interface(IXMLNode)
-    ['{3DB59377-BF19-4E16-AD91-3B31DCB40A66}']
+    ['{907BF527-6589-40A4-8CDE-0A5403C47E7F}']
     { Property Accessors }
     function Get_NLacre: WideString;
     procedure Set_NLacre(Value: WideString);
@@ -438,7 +459,7 @@ type
 { IXMLLacUnidTranspList }
 
   IXMLLacUnidTranspList = interface(IXMLNodeCollection)
-    ['{E81B941A-D1E1-4ECC-9E71-61B87494E05E}']
+    ['{E78811EF-3A14-45D9-BD13-B1605BF87EE6}']
     { Methods & Properties }
     function Add: IXMLLacUnidTransp;
     function Insert(const Index: Integer): IXMLLacUnidTransp;
@@ -450,7 +471,7 @@ type
 { IXMLTUnidCarga }
 
   IXMLTUnidCarga = interface(IXMLNode)
-    ['{44083847-95D6-4166-9A2C-B6A7E6A01432}']
+    ['{C1A89B92-8642-4C81-9782-D7B40C7394BC}']
     { Property Accessors }
     function Get_TpUnidCarga: WideString;
     function Get_IdUnidCarga: WideString;
@@ -469,7 +490,7 @@ type
 { IXMLTUnidCargaList }
 
   IXMLTUnidCargaList = interface(IXMLNodeCollection)
-    ['{F9963E47-7862-42E4-956E-38F5273555CC}']
+    ['{0D9719A3-E725-4A94-A72E-FCC08E516906}']
     { Methods & Properties }
     function Add: IXMLTUnidCarga;
     function Insert(const Index: Integer): IXMLTUnidCarga;
@@ -481,7 +502,7 @@ type
 { IXMLLacUnidCarga }
 
   IXMLLacUnidCarga = interface(IXMLNode)
-    ['{E9CCA485-A7C5-4E6A-AF06-DA40E1948874}']
+    ['{11BE0934-EF68-44DF-8720-2FC2457C9C46}']
     { Property Accessors }
     function Get_NLacre: WideString;
     procedure Set_NLacre(Value: WideString);
@@ -492,7 +513,7 @@ type
 { IXMLLacUnidCargaList }
 
   IXMLLacUnidCargaList = interface(IXMLNodeCollection)
-    ['{AA713170-1502-4EEB-94AE-1C2317906887}']
+    ['{EB063C2A-C637-4969-A69D-F515FDAC8557}']
     { Methods & Properties }
     function Add: IXMLLacUnidCarga;
     function Insert(const Index: Integer): IXMLLacUnidCarga;
@@ -504,7 +525,7 @@ type
 { IXMLPeri }
 
   IXMLPeri = interface(IXMLNode)
-    ['{3EA3D159-F684-4C67-AB33-89A0405D66BB}']
+    ['{5C73D062-E2F9-4FB3-90FD-42A9FE130E19}']
     { Property Accessors }
     function Get_NONU: WideString;
     function Get_XNomeAE: WideString;
@@ -530,7 +551,7 @@ type
 { IXMLPeriList }
 
   IXMLPeriList = interface(IXMLNodeCollection)
-    ['{FD8985D1-C6C8-4E04-8742-D126422704BF}']
+    ['{68B94570-E94F-48C1-8F65-B84A2D54D073}']
     { Methods & Properties }
     function Add: IXMLPeri;
     function Insert(const Index: Integer): IXMLPeri;
@@ -539,10 +560,24 @@ type
     property Items[Index: Integer]: IXMLPeri read Get_Item; default;
   end;
 
+{ IXMLInfEntregaParcial }
+
+  IXMLInfEntregaParcial = interface(IXMLNode)
+    ['{C588C879-8F44-4CB9-9F3E-A159A3B8552F}']
+    { Property Accessors }
+    function Get_QtdTotal: WideString;
+    function Get_QtdParcial: WideString;
+    procedure Set_QtdTotal(Value: WideString);
+    procedure Set_QtdParcial(Value: WideString);
+    { Methods & Properties }
+    property QtdTotal: WideString read Get_QtdTotal write Set_QtdTotal;
+    property QtdParcial: WideString read Get_QtdParcial write Set_QtdParcial;
+  end;
+
 { IXMLInfNFe }
 
   IXMLInfNFe = interface(IXMLNode)
-    ['{27C0FE59-79BA-46C6-B405-D29043E729AE}']
+    ['{BF9E1CEE-D3BD-4C8D-B425-4980D3337EDC}']
     { Property Accessors }
     function Get_ChNFe: WideString;
     function Get_SegCodBarra: WideString;
@@ -563,7 +598,7 @@ type
 { IXMLInfNFeList }
 
   IXMLInfNFeList = interface(IXMLNodeCollection)
-    ['{757B83C1-97A5-466E-8D1C-24484BE055E4}']
+    ['{E43D12CD-5890-4FDD-A51A-B1FE1E9E5217}']
     { Methods & Properties }
     function Add: IXMLInfNFe;
     function Insert(const Index: Integer): IXMLInfNFe;
@@ -575,7 +610,7 @@ type
 { IXMLInfMDFeTransp }
 
   IXMLInfMDFeTransp = interface(IXMLNode)
-    ['{8A80D856-A26B-477B-A330-CA01E0DDF162}']
+    ['{EDEA77D2-447F-45F5-8908-907D6EFA4CA0}']
     { Property Accessors }
     function Get_ChMDFe: WideString;
     function Get_IndReentrega: WideString;
@@ -593,7 +628,7 @@ type
 { IXMLInfMDFeTranspList }
 
   IXMLInfMDFeTranspList = interface(IXMLNodeCollection)
-    ['{B5F89835-646D-40C0-8FCA-E4AA115D8558}']
+    ['{60398C1A-11BE-42F4-BF87-2CC1E23D17D5}']
     { Methods & Properties }
     function Add: IXMLInfMDFeTransp;
     function Insert(const Index: Integer): IXMLInfMDFeTransp;
@@ -605,7 +640,7 @@ type
 { IXMLSeg }
 
   IXMLSeg = interface(IXMLNode)
-    ['{160158F7-2AB0-492E-95BD-0C0156A1F6E8}']
+    ['{AD58EA51-1688-4CF0-8F79-838457D58FFD}']
     { Property Accessors }
     function Get_InfResp: IXMLInfResp;
     function Get_InfSeg: IXMLInfSeg;
@@ -622,7 +657,7 @@ type
 { IXMLSegList }
 
   IXMLSegList = interface(IXMLNodeCollection)
-    ['{09B8522D-8CE3-4861-8AB0-4B556E274043}']
+    ['{10CB6B7D-C2F5-4B2D-9EFC-7625371897EC}']
     { Methods & Properties }
     function Add: IXMLSeg;
     function Insert(const Index: Integer): IXMLSeg;
@@ -634,7 +669,7 @@ type
 { IXMLInfResp }
 
   IXMLInfResp = interface(IXMLNode)
-    ['{8EBF09D3-8A9F-4A0B-BF02-98436AA14613}']
+    ['{9DE6145C-FBFE-425B-B343-B34632830221}']
     { Property Accessors }
     function Get_RespSeg: WideString;
     function Get_CNPJ: WideString;
@@ -651,7 +686,7 @@ type
 { IXMLInfSeg }
 
   IXMLInfSeg = interface(IXMLNode)
-    ['{F6D1CA4B-B4A5-4447-80F2-7B2CF7360EED}']
+    ['{55F795AE-FB2A-4666-885F-5A2040106896}']
     { Property Accessors }
     function Get_XSeg: WideString;
     function Get_CNPJ: WideString;
@@ -665,7 +700,7 @@ type
 { IXMLTot }
 
   IXMLTot = interface(IXMLNode)
-    ['{71CF0ED3-5E61-45AC-A94A-46C0019F4927}']
+    ['{4DA6FFA1-99D8-4A98-8063-A1CC4FF03E60}']
     { Property Accessors }
     function Get_QCTe: WideString;
     function Get_QNFe: WideString;
@@ -691,7 +726,7 @@ type
 { IXMLLacres }
 
   IXMLLacres = interface(IXMLNode)
-    ['{A1F1AF6A-2E5B-4162-84F8-4A6FBC407544}']
+    ['{BE94FBFD-42F7-4227-AFC1-721C501E2626}']
     { Property Accessors }
     function Get_NLacre: WideString;
     procedure Set_NLacre(Value: WideString);
@@ -702,7 +737,7 @@ type
 { IXMLLacresList }
 
   IXMLLacresList = interface(IXMLNodeCollection)
-    ['{FF69E7C8-7E7A-46A4-9963-9EED955C2231}']
+    ['{12355A82-239B-4E15-9721-CB16AED58F92}']
     { Methods & Properties }
     function Add: IXMLLacres;
     function Insert(const Index: Integer): IXMLLacres;
@@ -714,7 +749,7 @@ type
 { IXMLAutXML }
 
   IXMLAutXML = interface(IXMLNode)
-    ['{412BDF13-0855-4BAB-A575-450818CD2D53}']
+    ['{34D6104B-91BC-4C4A-BF45-32336C407711}']
     { Property Accessors }
     function Get_CNPJ: WideString;
     function Get_CPF: WideString;
@@ -728,7 +763,7 @@ type
 { IXMLAutXMLList }
 
   IXMLAutXMLList = interface(IXMLNodeCollection)
-    ['{1BF07DDD-B3B9-45B5-85B4-1F2A002055FA}']
+    ['{8E088435-17C4-4EB8-A931-7EE3E1BAE9E3}']
     { Methods & Properties }
     function Add: IXMLAutXML;
     function Insert(const Index: Integer): IXMLAutXML;
@@ -740,7 +775,7 @@ type
 { IXMLInfAdic }
 
   IXMLInfAdic = interface(IXMLNode)
-    ['{8CDF65CC-46DE-4A7B-8DD1-392E0DD98235}']
+    ['{36B33A16-DC94-4ECF-ADD7-AE10A375978A}']
     { Property Accessors }
     function Get_InfAdFisco: WideString;
     function Get_InfCpl: WideString;
@@ -751,10 +786,47 @@ type
     property InfCpl: WideString read Get_InfCpl write Set_InfCpl;
   end;
 
+{ IXMLTRespTec }
+
+  IXMLTRespTec = interface(IXMLNode)
+    ['{414FCA99-9AA6-4ABB-81B0-73D972E8B74C}']
+    { Property Accessors }
+    function Get_CNPJ: WideString;
+    function Get_XContato: WideString;
+    function Get_Email: WideString;
+    function Get_Fone: WideString;
+    function Get_IdCSRT: WideString;
+    function Get_HashCSRT: WideString;
+    procedure Set_CNPJ(Value: WideString);
+    procedure Set_XContato(Value: WideString);
+    procedure Set_Email(Value: WideString);
+    procedure Set_Fone(Value: WideString);
+    procedure Set_IdCSRT(Value: WideString);
+    procedure Set_HashCSRT(Value: WideString);
+    { Methods & Properties }
+    property CNPJ: WideString read Get_CNPJ write Set_CNPJ;
+    property XContato: WideString read Get_XContato write Set_XContato;
+    property Email: WideString read Get_Email write Set_Email;
+    property Fone: WideString read Get_Fone write Set_Fone;
+    property IdCSRT: WideString read Get_IdCSRT write Set_IdCSRT;
+    property HashCSRT: WideString read Get_HashCSRT write Set_HashCSRT;
+  end;
+
+{ IXMLInfMDFeSupl }
+
+  IXMLInfMDFeSupl = interface(IXMLNode)
+    ['{34A55CCE-10E9-4A8F-8853-C423E0128C3C}']
+    { Property Accessors }
+    function Get_QrCodMDFe: WideString;
+    procedure Set_QrCodMDFe(Value: WideString);
+    { Methods & Properties }
+    property QrCodMDFe: WideString read Get_QrCodMDFe write Set_QrCodMDFe;
+  end;
+
 { IXMLSignatureType_ds }
 
   IXMLSignatureType_ds = interface(IXMLNode)
-    ['{12CFE87B-4BCA-40B4-A3E5-CDECBA1BCDF7}']
+    ['{917B2EBD-C56D-46AF-9764-128F73B9A8F3}']
     { Property Accessors }
     function Get_Id: WideString;
     function Get_SignedInfo: IXMLSignedInfoType_ds;
@@ -771,7 +843,7 @@ type
 { IXMLSignedInfoType_ds }
 
   IXMLSignedInfoType_ds = interface(IXMLNode)
-    ['{BFCC4C19-CBDE-401E-9953-04F19CD61F59}']
+    ['{CC01E0AE-7275-4BD3-A0FF-5CC55D1C1CD0}']
     { Property Accessors }
     function Get_Id: WideString;
     function Get_CanonicalizationMethod: IXMLCanonicalizationMethod_ds;
@@ -788,7 +860,7 @@ type
 { IXMLCanonicalizationMethod_ds }
 
   IXMLCanonicalizationMethod_ds = interface(IXMLNode)
-    ['{66073940-9316-474F-A90F-3A48984A6D15}']
+    ['{41EF0EFB-8006-4938-A73A-42FFCED8CE14}']
     { Property Accessors }
     function Get_Algorithm: WideString;
     procedure Set_Algorithm(Value: WideString);
@@ -799,7 +871,7 @@ type
 { IXMLSignatureMethod_ds }
 
   IXMLSignatureMethod_ds = interface(IXMLNode)
-    ['{38272116-6A81-4BCB-8445-21DA80214721}']
+    ['{FF487EC4-4203-46AC-BB11-3F5C088026F2}']
     { Property Accessors }
     function Get_Algorithm: WideString;
     procedure Set_Algorithm(Value: WideString);
@@ -810,7 +882,7 @@ type
 { IXMLReferenceType_ds }
 
   IXMLReferenceType_ds = interface(IXMLNode)
-    ['{50A15C22-E33F-4C84-9FCE-E51E66ACFF0E}']
+    ['{C58B0A44-F629-44B8-937A-31ACD61A04D0}']
     { Property Accessors }
     function Get_Id: WideString;
     function Get_URI: WideString;
@@ -834,7 +906,7 @@ type
 { IXMLTransformsType_ds }
 
   IXMLTransformsType_ds = interface(IXMLNodeCollection)
-    ['{3E0C4233-44A3-47E1-AC00-7D05D5C9592A}']
+    ['{CAF4ECBD-100D-4592-BBD1-0416E2550A5D}']
     { Property Accessors }
     function Get_Transform(Index: Integer): IXMLTransformType_ds;
     { Methods & Properties }
@@ -846,7 +918,7 @@ type
 { IXMLTransformType_ds }
 
   IXMLTransformType_ds = interface(IXMLNodeCollection)
-    ['{9FF3C329-337F-47A1-B133-80ECABA4C492}']
+    ['{874101CB-BFE1-45BA-BF8F-D56F6AD53F22}']
     { Property Accessors }
     function Get_Algorithm: WideString;
     function Get_XPath(Index: Integer): WideString;
@@ -861,7 +933,7 @@ type
 { IXMLDigestMethod_ds }
 
   IXMLDigestMethod_ds = interface(IXMLNode)
-    ['{0D7E4189-DA80-4331-9A53-5C5556103DE7}']
+    ['{2B73EC12-C0A3-4BD1-858C-5FD12E1625F5}']
     { Property Accessors }
     function Get_Algorithm: WideString;
     procedure Set_Algorithm(Value: WideString);
@@ -872,7 +944,7 @@ type
 { IXMLSignatureValueType_ds }
 
   IXMLSignatureValueType_ds = interface(IXMLNode)
-    ['{1E261094-4595-49CC-8CB6-8D8F3D26D0E7}']
+    ['{40D978DF-D50D-4783-8CE0-0CFBFA55D739}']
     { Property Accessors }
     function Get_Id: WideString;
     procedure Set_Id(Value: WideString);
@@ -883,7 +955,7 @@ type
 { IXMLKeyInfoType_ds }
 
   IXMLKeyInfoType_ds = interface(IXMLNode)
-    ['{22F07894-D8FC-4A19-B124-2BB25816CCA5}']
+    ['{D8C98B7F-6C70-4361-B188-3E448CCE8264}']
     { Property Accessors }
     function Get_Id: WideString;
     function Get_X509Data: IXMLX509DataType_ds;
@@ -896,7 +968,7 @@ type
 { IXMLX509DataType_ds }
 
   IXMLX509DataType_ds = interface(IXMLNode)
-    ['{225EA25B-2A38-4B4E-B496-19340A51F054}']
+    ['{032DE806-416E-4033-B240-E716F3C7E2EA}']
     { Property Accessors }
     function Get_X509Certificate: WideString;
     procedure Set_X509Certificate(Value: WideString);
@@ -904,10 +976,104 @@ type
     property X509Certificate: WideString read Get_X509Certificate write Set_X509Certificate;
   end;
 
+{ IXMLTRetMDFe }
+
+  IXMLTRetMDFe = interface(IXMLNode)
+    ['{4FBE3BF3-A785-4173-A6A6-9A6D93E6BD7C}']
+    { Property Accessors }
+    function Get_Versao: WideString;
+    function Get_TpAmb: WideString;
+    function Get_CUF: WideString;
+    function Get_VerAplic: WideString;
+    function Get_CStat: WideString;
+    function Get_XMotivo: WideString;
+    function Get_ProtMDFe: IXMLTProtMDFe;
+    procedure Set_Versao(Value: WideString);
+    procedure Set_TpAmb(Value: WideString);
+    procedure Set_CUF(Value: WideString);
+    procedure Set_VerAplic(Value: WideString);
+    procedure Set_CStat(Value: WideString);
+    procedure Set_XMotivo(Value: WideString);
+    { Methods & Properties }
+    property Versao: WideString read Get_Versao write Set_Versao;
+    property TpAmb: WideString read Get_TpAmb write Set_TpAmb;
+    property CUF: WideString read Get_CUF write Set_CUF;
+    property VerAplic: WideString read Get_VerAplic write Set_VerAplic;
+    property CStat: WideString read Get_CStat write Set_CStat;
+    property XMotivo: WideString read Get_XMotivo write Set_XMotivo;
+    property ProtMDFe: IXMLTProtMDFe read Get_ProtMDFe;
+  end;
+
+{ IXMLTProtMDFe }
+
+  IXMLTProtMDFe = interface(IXMLNode)
+    ['{27250DED-39EF-4A1D-8695-B8F28876B83C}']
+    { Property Accessors }
+    function Get_Versao: WideString;
+    function Get_InfProt: IXMLInfProt;
+    function Get_InfFisco: IXMLInfFisco;
+    function Get_Signature: IXMLSignatureType_ds;
+    procedure Set_Versao(Value: WideString);
+    { Methods & Properties }
+    property Versao: WideString read Get_Versao write Set_Versao;
+    property InfProt: IXMLInfProt read Get_InfProt;
+    property InfFisco: IXMLInfFisco read Get_InfFisco;
+    property Signature: IXMLSignatureType_ds read Get_Signature;
+  end;
+
+{ IXMLInfProt }
+
+  IXMLInfProt = interface(IXMLNode)
+    ['{E4299920-16A1-4381-85FD-42CC77BE9667}']
+    { Property Accessors }
+    function Get_Id: WideString;
+    function Get_TpAmb: WideString;
+    function Get_VerAplic: WideString;
+    function Get_ChMDFe: WideString;
+    function Get_DhRecbto: WideString;
+    function Get_NProt: WideString;
+    function Get_DigVal: WideString;
+    function Get_CStat: WideString;
+    function Get_XMotivo: WideString;
+    procedure Set_Id(Value: WideString);
+    procedure Set_TpAmb(Value: WideString);
+    procedure Set_VerAplic(Value: WideString);
+    procedure Set_ChMDFe(Value: WideString);
+    procedure Set_DhRecbto(Value: WideString);
+    procedure Set_NProt(Value: WideString);
+    procedure Set_DigVal(Value: WideString);
+    procedure Set_CStat(Value: WideString);
+    procedure Set_XMotivo(Value: WideString);
+    { Methods & Properties }
+    property Id: WideString read Get_Id write Set_Id;
+    property TpAmb: WideString read Get_TpAmb write Set_TpAmb;
+    property VerAplic: WideString read Get_VerAplic write Set_VerAplic;
+    property ChMDFe: WideString read Get_ChMDFe write Set_ChMDFe;
+    property DhRecbto: WideString read Get_DhRecbto write Set_DhRecbto;
+    property NProt: WideString read Get_NProt write Set_NProt;
+    property DigVal: WideString read Get_DigVal write Set_DigVal;
+    property CStat: WideString read Get_CStat write Set_CStat;
+    property XMotivo: WideString read Get_XMotivo write Set_XMotivo;
+  end;
+
+{ IXMLInfFisco }
+
+  IXMLInfFisco = interface(IXMLNode)
+    ['{47254CA3-8F81-4109-A481-21DF9A01E176}']
+    { Property Accessors }
+    function Get_CMsg: WideString;
+    function Get_XMsg: WideString;
+    procedure Set_CMsg(Value: WideString);
+    procedure Set_XMsg(Value: WideString);
+    { Methods & Properties }
+    property CMsg: WideString read Get_CMsg write Set_CMsg;
+    property XMsg: WideString read Get_XMsg write Set_XMsg;
+  end;
+
 { IXMLTRetEnviMDFe }
 
   IXMLTRetEnviMDFe = interface(IXMLNode)
-    ['{91D01F72-ED7E-41E5-86A3-46796B95ABF4}']
+    ['{45B51B18-FCD4-4E8E-8DBD-2D73D564569D}']
     { Property Accessors }
     function Get_Versao: WideString;
     function Get_TpAmb: WideString;
@@ -935,7 +1101,7 @@ type
 { IXMLInfRec }
 
   IXMLInfRec = interface(IXMLNode)
-    ['{9FD8B407-6EA4-4904-BA25-67DDD9DEA47E}']
+    ['{29CDE8E5-D86D-4E2B-8A45-C42DF743FCCD}']
     { Property Accessors }
     function Get_NRec: WideString;
     function Get_DhRecbto: WideString;
@@ -952,7 +1118,7 @@ type
 { IXMLTEndereco }
 
   IXMLTEndereco = interface(IXMLNode)
-    ['{05A2AA26-CCC3-4011-8369-54340203116A}']
+    ['{4FB1B14D-B272-4313-80BB-D28FDF221FCC}']
     { Property Accessors }
     function Get_XLgr: WideString;
     function Get_Nro: WideString;
@@ -990,7 +1156,7 @@ type
 { IXMLTEndernac }
 
   IXMLTEndernac = interface(IXMLNode)
-    ['{3E259D74-7CF0-4809-8AC7-B52420699CE0}']
+    ['{CEC2C853-DAA4-4021-85F3-2731237613F5}']
     { Property Accessors }
     function Get_XLgr: WideString;
     function Get_Nro: WideString;
@@ -1022,7 +1188,7 @@ type
 { IXMLTEnderFer }
 
   IXMLTEnderFer = interface(IXMLNode)
-    ['{04F440FA-FB7F-40BD-BF59-25B2988D78A6}']
+    ['{D1019F4D-A0BF-4975-97A1-00BDC68E8796}']
     { Property Accessors }
     function Get_XLgr: WideString;
     function Get_Nro: WideString;
@@ -1054,7 +1220,7 @@ type
 { IXMLTEndOrg }
 
   IXMLTEndOrg = interface(IXMLNode)
-    ['{209FA76F-19D7-4FCD-AA81-3E9AC2139021}']
+    ['{AC207DE3-4E62-45A0-AB45-370D8DBDE77F}']
     { Property Accessors }
     function Get_XLgr: WideString;
     function Get_Nro: WideString;
@@ -1095,7 +1261,7 @@ type
 { IXMLTLocal }
 
   IXMLTLocal = interface(IXMLNode)
-    ['{E30BBB9D-9FF6-4683-8521-674DFD8C614F}']
+    ['{85BB4A0B-9D3C-4881-9976-8B52BEB2F41E}']
     { Property Accessors }
     function Get_CMun: WideString;
     function Get_XMun: WideString;
@@ -1112,7 +1278,7 @@ type
 { IXMLTEndReEnt }
 
   IXMLTEndReEnt = interface(IXMLNode)
-    ['{6D9AA72D-389A-4E95-ADE7-8C637E2E0F77}']
+    ['{ABDA93E3-DF47-4F28-AC1A-5275896C4031}']
     { Property Accessors }
     function Get_CNPJ: WideString;
     function Get_CPF: WideString;
@@ -1150,7 +1316,7 @@ type
 { IXMLTNFeNF }
 
   IXMLTNFeNF = interface(IXMLNode)
-    ['{60632ED1-D822-4A3A-9CDE-74FD024CBB14}']
+    ['{43357FF5-56C3-49B2-A61A-90477321F7C5}']
     { Property Accessors }
     function Get_InfNFe: IXMLInfNFe;
     function Get_InfNF: IXMLInfNF;
@@ -1162,7 +1328,7 @@ type
 { IXMLInfNF }
 
   IXMLInfNF = interface(IXMLNode)
-    ['{3C003F6D-5BF4-4A9B-8CCD-5A682E6C43EC}']
+    ['{9E1E86F4-61B4-4804-87DF-592D85D72FC4}']
     { Property Accessors }
     function Get_Emi: IXMLEmi;
     function Get_Dest: IXMLDest;
@@ -1189,7 +1355,7 @@ type
 { IXMLEmi }
 
   IXMLEmi = interface(IXMLNode)
-    ['{EEF4916E-EB87-485B-81FC-AF89BC87E207}']
+    ['{E863C7AE-D7B6-4B10-AEFA-DB731BF32288}']
     { Property Accessors }
     function Get_CNPJ: WideString;
     function Get_XNome: WideString;
@@ -1206,7 +1372,7 @@ type
 { IXMLDest }
 
   IXMLDest = interface(IXMLNode)
-    ['{579B4544-C652-4315-8F31-D0D36785A52C}']
+    ['{9DB0EE0A-3929-464E-A42D-C2331F3131B6}']
     { Property Accessors }
     function Get_CNPJ: WideString;
     function Get_CPF: WideString;
@@ -1226,7 +1392,7 @@ type
 { IXMLNAverList }
 
   IXMLNAverList = interface(IXMLNodeCollection)
-    ['{B4D9F182-322F-47A9-A755-430780809309}']
+    ['{54886B12-7653-4FDB-B764-7434E8B741BD}']
     { Methods & Properties }
     function Add(const Value: WideString): IXMLNode;
     function Insert(const Index: Integer; const Value: WideString): IXMLNode;
@@ -1262,6 +1428,7 @@ type
   TXMLLacUnidCargaList = class;
   TXMLPeri = class;
   TXMLPeriList = class;
+  TXMLInfEntregaParcial = class;
   TXMLInfNFe = class;
   TXMLInfNFeList = class;
   TXMLInfMDFeTransp = class;
@@ -1276,6 +1443,8 @@ type
   TXMLAutXML = class;
   TXMLAutXMLList = class;
   TXMLInfAdic = class;
+  TXMLTRespTec = class;
+  TXMLInfMDFeSupl = class;
   TXMLSignatureType_ds = class;
   TXMLSignedInfoType_ds = class;
   TXMLCanonicalizationMethod_ds = class;
@@ -1287,6 +1456,10 @@ type
   TXMLSignatureValueType_ds = class;
   TXMLKeyInfoType_ds = class;
   TXMLX509DataType_ds = class;
+  TXMLTRetMDFe = class;
+  TXMLTProtMDFe = class;
+  TXMLInfProt = class;
+  TXMLInfFisco = class;
   TXMLTRetEnviMDFe = class;
   TXMLInfRec = class;
   TXMLTEndereco = class;
@@ -1321,6 +1494,7 @@ type
   protected
     { IXMLTMDFe }
     function Get_InfMDFe: IXMLInfMDFe;
+    function Get_InfMDFeSupl: IXMLInfMDFeSupl;
     function Get_Signature: IXMLSignatureType_ds;
   public
     procedure AfterConstruction; override;
@@ -1346,6 +1520,7 @@ type
     function Get_Lacres: IXMLLacresList;
     function Get_AutXML: IXMLAutXMLList;
     function Get_InfAdic: IXMLInfAdic;
+    function Get_InfRespTec: IXMLTRespTec;
     procedure Set_Versao(Value: WideString);
     procedure Set_Id(Value: WideString);
   public
@@ -1379,6 +1554,8 @@ type
     function Get_InfMunCarrega: IXMLInfMunCarregaList;
     function Get_InfPercurso: IXMLInfPercursoList;
     function Get_DhIniViagem: WideString;
+    function Get_IndCanalVerde: WideString;
+    function Get_IndCarregaPosterior: WideString;
     procedure Set_CUF(Value: WideString);
     procedure Set_TpAmb(Value: WideString);
     procedure Set_TpEmit(Value: WideString);
@@ -1396,6 +1573,8 @@ type
     procedure Set_UFIni(Value: WideString);
     procedure Set_UFFim(Value: WideString);
     procedure Set_DhIniViagem(Value: WideString);
+    procedure Set_IndCanalVerde(Value: WideString);
+    procedure Set_IndCarregaPosterior(Value: WideString);
   public
     procedure AfterConstruction; override;
   end;
@@ -1448,11 +1627,13 @@ type
   protected
     { IXMLEmit }
     function Get_CNPJ: WideString;
+    function Get_CPF: WideString;
     function Get_IE: WideString;
     function Get_XNome: WideString;
     function Get_XFant: WideString;
     function Get_EnderEmit: IXMLTEndeEmi;
     procedure Set_CNPJ(Value: WideString);
+    procedure Set_CPF(Value: WideString);
     procedure Set_IE(Value: WideString);
     procedure Set_XNome(Value: WideString);
     procedure Set_XFant(Value: WideString);
@@ -1541,6 +1722,7 @@ type
     function Get_IndReentrega: WideString;
     function Get_InfUnidTransp: IXMLTUnidadeTranspList;
     function Get_Peri: IXMLPeriList;
+    function Get_InfEntregaParcial: IXMLInfEntregaParcial;
     procedure Set_ChCTe(Value: WideString);
     procedure Set_SegCodBarra(Value: WideString);
     procedure Set_IndReentrega(Value: WideString);
@@ -1687,6 +1869,17 @@ type
     function Insert(const Index: Integer): IXMLPeri;
 
     function Get_Item(Index: Integer): IXMLPeri;
+  end;
+
+{ TXMLInfEntregaParcial }
+
+  TXMLInfEntregaParcial = class(TXMLNode, IXMLInfEntregaParcial)
+  protected
+    { IXMLInfEntregaParcial }
+    function Get_QtdTotal: WideString;
+    function Get_QtdParcial: WideString;
+    procedure Set_QtdTotal(Value: WideString);
+    procedure Set_QtdParcial(Value: WideString);
   end;
 
 { TXMLInfNFe }
@@ -1872,6 +2065,34 @@ type
     procedure Set_InfCpl(Value: WideString);
   end;
 
+{ TXMLTRespTec }
+
+  TXMLTRespTec = class(TXMLNode, IXMLTRespTec)
+  protected
+    { IXMLTRespTec }
+    function Get_CNPJ: WideString;
+    function Get_XContato: WideString;
+    function Get_Email: WideString;
+    function Get_Fone: WideString;
+    function Get_IdCSRT: WideString;
+    function Get_HashCSRT: WideString;
+    procedure Set_CNPJ(Value: WideString);
+    procedure Set_XContato(Value: WideString);
+    procedure Set_Email(Value: WideString);
+    procedure Set_Fone(Value: WideString);
+    procedure Set_IdCSRT(Value: WideString);
+    procedure Set_HashCSRT(Value: WideString);
+  end;
+
+{ TXMLInfMDFeSupl }
+
+  TXMLInfMDFeSupl = class(TXMLNode, IXMLInfMDFeSupl)
+  protected
+    { IXMLInfMDFeSupl }
+    function Get_QrCodMDFe: WideString;
+    procedure Set_QrCodMDFe(Value: WideString);
+  end;
+
 { TXMLSignatureType_ds }
 
   TXMLSignatureType_ds = class(TXMLNode, IXMLSignatureType_ds)
@@ -2000,6 +2221,78 @@ type
     { IXMLX509DataType_ds }
     function Get_X509Certificate: WideString;
     procedure Set_X509Certificate(Value: WideString);
+  end;
+
+{ TXMLTRetMDFe }
+
+  TXMLTRetMDFe = class(TXMLNode, IXMLTRetMDFe)
+  protected
+    { IXMLTRetMDFe }
+    function Get_Versao: WideString;
+    function Get_TpAmb: WideString;
+    function Get_CUF: WideString;
+    function Get_VerAplic: WideString;
+    function Get_CStat: WideString;
+    function Get_XMotivo: WideString;
+    function Get_ProtMDFe: IXMLTProtMDFe;
+    procedure Set_Versao(Value: WideString);
+    procedure Set_TpAmb(Value: WideString);
+    procedure Set_CUF(Value: WideString);
+    procedure Set_VerAplic(Value: WideString);
+    procedure Set_CStat(Value: WideString);
+    procedure Set_XMotivo(Value: WideString);
+  public
+    procedure AfterConstruction; override;
+  end;
+
+{ TXMLTProtMDFe }
+
+  TXMLTProtMDFe = class(TXMLNode, IXMLTProtMDFe)
+  protected
+    { IXMLTProtMDFe }
+    function Get_Versao: WideString;
+    function Get_InfProt: IXMLInfProt;
+    function Get_InfFisco: IXMLInfFisco;
+    function Get_Signature: IXMLSignatureType_ds;
+    procedure Set_Versao(Value: WideString);
+  public
+    procedure AfterConstruction; override;
+  end;
+
+{ TXMLInfProt }
+
+  TXMLInfProt = class(TXMLNode, IXMLInfProt)
+  protected
+    { IXMLInfProt }
+    function Get_Id: WideString;
+    function Get_TpAmb: WideString;
+    function Get_VerAplic: WideString;
+    function Get_ChMDFe: WideString;
+    function Get_DhRecbto: WideString;
+    function Get_NProt: WideString;
+    function Get_DigVal: WideString;
+    function Get_CStat: WideString;
+    function Get_XMotivo: WideString;
+    procedure Set_Id(Value: WideString);
+    procedure Set_TpAmb(Value: WideString);
+    procedure Set_VerAplic(Value: WideString);
+    procedure Set_ChMDFe(Value: WideString);
+    procedure Set_DhRecbto(Value: WideString);
+    procedure Set_NProt(Value: WideString);
+    procedure Set_DigVal(Value: WideString);
+    procedure Set_CStat(Value: WideString);
+    procedure Set_XMotivo(Value: WideString);
+  end;
+
+{ TXMLInfFisco }
+
+  TXMLInfFisco = class(TXMLNode, IXMLInfFisco)
+  protected
+    { IXMLInfFisco }
+    function Get_CMsg: WideString;
+    function Get_XMsg: WideString;
+    procedure Set_CMsg(Value: WideString);
+    procedure Set_XMsg(Value: WideString);
   end;
 
 { TXMLTRetEnviMDFe }
@@ -2261,6 +2554,8 @@ const
 
 implementation
 
+uses xmlutil;
+
 { Global Functions }
 
 function GetenviMDFe(Doc: IXMLDocument): IXMLTEnviMDFe;
@@ -2316,6 +2611,7 @@ end;
 procedure TXMLTMDFe.AfterConstruction;
 begin
   RegisterChildNode('infMDFe', TXMLInfMDFe);
+  RegisterChildNode('infMDFeSupl', TXMLInfMDFeSupl);
   RegisterChildNode('Signature', TXMLSignatureType_ds);
   inherited;
 end;
@@ -2323,6 +2619,11 @@ end;
 function TXMLTMDFe.Get_InfMDFe: IXMLInfMDFe;
 begin
   Result := ChildNodes['infMDFe'] as IXMLInfMDFe;
+end;
+
+function TXMLTMDFe.Get_InfMDFeSupl: IXMLInfMDFeSupl;
+begin
+  Result := ChildNodes['infMDFeSupl'] as IXMLInfMDFeSupl;
 end;
 
 function TXMLTMDFe.Get_Signature: IXMLSignatureType_ds;
@@ -2343,6 +2644,7 @@ begin
   RegisterChildNode('lacres', TXMLLacres);
   RegisterChildNode('autXML', TXMLAutXML);
   RegisterChildNode('infAdic', TXMLInfAdic);
+  RegisterChildNode('infRespTec', TXMLTRespTec);
   FSeg := CreateCollection(TXMLSegList, IXMLSeg, 'seg') as IXMLSegList;
   FLacres := CreateCollection(TXMLLacresList, IXMLLacres, 'lacres') as IXMLLacresList;
   FAutXML := CreateCollection(TXMLAutXMLList, IXMLAutXML, 'autXML') as IXMLAutXMLList;
@@ -2412,6 +2714,11 @@ end;
 function TXMLInfMDFe.Get_InfAdic: IXMLInfAdic;
 begin
   Result := ChildNodes['infAdic'] as IXMLInfAdic;
+end;
+
+function TXMLInfMDFe.Get_InfRespTec: IXMLTRespTec;
+begin
+  Result := ChildNodes['infRespTec'] as IXMLTRespTec;
 end;
 
 { TXMLIde }
@@ -2605,6 +2912,26 @@ begin
   ChildNodes['dhIniViagem'].NodeValue := Value;
 end;
 
+function TXMLIde.Get_IndCanalVerde: WideString;
+begin
+  Result := ChildNodes['indCanalVerde'].Text;
+end;
+
+procedure TXMLIde.Set_IndCanalVerde(Value: WideString);
+begin
+  ChildNodes['indCanalVerde'].NodeValue := Value;
+end;
+
+function TXMLIde.Get_IndCarregaPosterior: WideString;
+begin
+  Result := ChildNodes['indCarregaPosterior'].Text;
+end;
+
+procedure TXMLIde.Set_IndCarregaPosterior(Value: WideString);
+begin
+  ChildNodes['indCarregaPosterior'].NodeValue := Value;
+end;
+
 { TXMLInfMunCarrega }
 
 function TXMLInfMunCarrega.Get_CMunCarrega: WideString;
@@ -2689,6 +3016,16 @@ end;
 procedure TXMLEmit.Set_CNPJ(Value: WideString);
 begin
   ChildNodes['CNPJ'].NodeValue := Value;
+end;
+
+function TXMLEmit.Get_CPF: WideString;
+begin
+  Result := ChildNodes['CPF'].Text;
+end;
+
+procedure TXMLEmit.Set_CPF(Value: WideString);
+begin
+  ChildNodes['CPF'].NodeValue := Value;
 end;
 
 function TXMLEmit.Get_IE: WideString;
@@ -2919,6 +3256,7 @@ procedure TXMLInfCTe.AfterConstruction;
 begin
   RegisterChildNode('infUnidTransp', TXMLTUnidadeTransp);
   RegisterChildNode('peri', TXMLPeri);
+  RegisterChildNode('infEntregaParcial', TXMLInfEntregaParcial);
   FInfUnidTransp := CreateCollection(TXMLTUnidadeTranspList, IXMLTUnidadeTransp, 'infUnidTransp') as IXMLTUnidadeTranspList;
   FPeri := CreateCollection(TXMLPeriList, IXMLPeri, 'peri') as IXMLPeriList;
   inherited;
@@ -2962,6 +3300,11 @@ end;
 function TXMLInfCTe.Get_Peri: IXMLPeriList;
 begin
   Result := FPeri;
+end;
+
+function TXMLInfCTe.Get_InfEntregaParcial: IXMLInfEntregaParcial;
+begin
+  Result := ChildNodes['infEntregaParcial'] as IXMLInfEntregaParcial;
 end;
 
 { TXMLInfCTeList }
@@ -3245,6 +3588,28 @@ end;
 function TXMLPeriList.Get_Item(Index: Integer): IXMLPeri;
 begin
   Result := List[Index] as IXMLPeri;
+end;
+
+{ TXMLInfEntregaParcial }
+
+function TXMLInfEntregaParcial.Get_QtdTotal: WideString;
+begin
+  Result := ChildNodes['qtdTotal'].Text;
+end;
+
+procedure TXMLInfEntregaParcial.Set_QtdTotal(Value: WideString);
+begin
+  ChildNodes['qtdTotal'].NodeValue := Value;
+end;
+
+function TXMLInfEntregaParcial.Get_QtdParcial: WideString;
+begin
+  Result := ChildNodes['qtdParcial'].Text;
+end;
+
+procedure TXMLInfEntregaParcial.Set_QtdParcial(Value: WideString);
+begin
+  ChildNodes['qtdParcial'].NodeValue := Value;
 end;
 
 { TXMLInfNFe }
@@ -3631,6 +3996,80 @@ begin
   ChildNodes['infCpl'].NodeValue := Value;
 end;
 
+{ TXMLTRespTec }
+
+function TXMLTRespTec.Get_CNPJ: WideString;
+begin
+  Result := ChildNodes['CNPJ'].Text;
+end;
+
+procedure TXMLTRespTec.Set_CNPJ(Value: WideString);
+begin
+  ChildNodes['CNPJ'].NodeValue := Value;
+end;
+
+function TXMLTRespTec.Get_XContato: WideString;
+begin
+  Result := ChildNodes['xContato'].Text;
+end;
+
+procedure TXMLTRespTec.Set_XContato(Value: WideString);
+begin
+  ChildNodes['xContato'].NodeValue := Value;
+end;
+
+function TXMLTRespTec.Get_Email: WideString;
+begin
+  Result := ChildNodes['email'].Text;
+end;
+
+procedure TXMLTRespTec.Set_Email(Value: WideString);
+begin
+  ChildNodes['email'].NodeValue := Value;
+end;
+
+function TXMLTRespTec.Get_Fone: WideString;
+begin
+  Result := ChildNodes['fone'].Text;
+end;
+
+procedure TXMLTRespTec.Set_Fone(Value: WideString);
+begin
+  ChildNodes['fone'].NodeValue := Value;
+end;
+
+function TXMLTRespTec.Get_IdCSRT: WideString;
+begin
+  Result := ChildNodes['idCSRT'].Text;
+end;
+
+procedure TXMLTRespTec.Set_IdCSRT(Value: WideString);
+begin
+  ChildNodes['idCSRT'].NodeValue := Value;
+end;
+
+function TXMLTRespTec.Get_HashCSRT: WideString;
+begin
+  Result := ChildNodes['hashCSRT'].Text;
+end;
+
+procedure TXMLTRespTec.Set_HashCSRT(Value: WideString);
+begin
+  ChildNodes['hashCSRT'].NodeValue := Value;
+end;
+
+{ TXMLInfMDFeSupl }
+
+function TXMLInfMDFeSupl.Get_QrCodMDFe: WideString;
+begin
+  Result := ChildNodes['qrCodMDFe'].Text;
+end;
+
+procedure TXMLInfMDFeSupl.Set_QrCodMDFe(Value: WideString);
+begin
+  ChildNodes['qrCodMDFe'].NodeValue := Value;
+end;
+
 { TXMLSignatureType_ds }
 
 procedure TXMLSignatureType_ds.AfterConstruction;
@@ -3902,6 +4341,228 @@ end;
 procedure TXMLX509DataType_ds.Set_X509Certificate(Value: WideString);
 begin
   ChildNodes['X509Certificate'].NodeValue := Value;
+end;
+
+{ TXMLTRetMDFe }
+
+procedure TXMLTRetMDFe.AfterConstruction;
+begin
+  RegisterChildNode('protMDFe', TXMLTProtMDFe);
+  inherited;
+end;
+
+function TXMLTRetMDFe.Get_Versao: WideString;
+begin
+  Result := AttributeNodes['versao'].Text;
+end;
+
+procedure TXMLTRetMDFe.Set_Versao(Value: WideString);
+begin
+  SetAttribute('versao', Value);
+end;
+
+function TXMLTRetMDFe.Get_TpAmb: WideString;
+begin
+  Result := ChildNodes['tpAmb'].Text;
+end;
+
+procedure TXMLTRetMDFe.Set_TpAmb(Value: WideString);
+begin
+  ChildNodes['tpAmb'].NodeValue := Value;
+end;
+
+function TXMLTRetMDFe.Get_CUF: WideString;
+begin
+  Result := ChildNodes['cUF'].Text;
+end;
+
+procedure TXMLTRetMDFe.Set_CUF(Value: WideString);
+begin
+  ChildNodes['cUF'].NodeValue := Value;
+end;
+
+function TXMLTRetMDFe.Get_VerAplic: WideString;
+begin
+  Result := ChildNodes['verAplic'].Text;
+end;
+
+procedure TXMLTRetMDFe.Set_VerAplic(Value: WideString);
+begin
+  ChildNodes['verAplic'].NodeValue := Value;
+end;
+
+function TXMLTRetMDFe.Get_CStat: WideString;
+begin
+  Result := ChildNodes['cStat'].Text;
+end;
+
+procedure TXMLTRetMDFe.Set_CStat(Value: WideString);
+begin
+  ChildNodes['cStat'].NodeValue := Value;
+end;
+
+function TXMLTRetMDFe.Get_XMotivo: WideString;
+begin
+  Result := ChildNodes['xMotivo'].Text;
+end;
+
+procedure TXMLTRetMDFe.Set_XMotivo(Value: WideString);
+begin
+  ChildNodes['xMotivo'].NodeValue := Value;
+end;
+
+function TXMLTRetMDFe.Get_ProtMDFe: IXMLTProtMDFe;
+begin
+  Result := ChildNodes['protMDFe'] as IXMLTProtMDFe;
+end;
+
+{ TXMLTProtMDFe }
+
+procedure TXMLTProtMDFe.AfterConstruction;
+begin
+  RegisterChildNode('infProt', TXMLInfProt);
+  RegisterChildNode('infFisco', TXMLInfFisco);
+  RegisterChildNode('Signature', TXMLSignatureType_ds);
+  inherited;
+end;
+
+function TXMLTProtMDFe.Get_Versao: WideString;
+begin
+  Result := AttributeNodes['versao'].Text;
+end;
+
+procedure TXMLTProtMDFe.Set_Versao(Value: WideString);
+begin
+  SetAttribute('versao', Value);
+end;
+
+function TXMLTProtMDFe.Get_InfProt: IXMLInfProt;
+begin
+  Result := ChildNodes['infProt'] as IXMLInfProt;
+end;
+
+function TXMLTProtMDFe.Get_InfFisco: IXMLInfFisco;
+begin
+  Result := ChildNodes['infFisco'] as IXMLInfFisco;
+end;
+
+function TXMLTProtMDFe.Get_Signature: IXMLSignatureType_ds;
+begin
+  Result := ChildNodes['Signature'] as IXMLSignatureType_ds;
+end;
+
+{ TXMLInfProt }
+
+function TXMLInfProt.Get_Id: WideString;
+begin
+  Result := AttributeNodes['Id'].Text;
+end;
+
+procedure TXMLInfProt.Set_Id(Value: WideString);
+begin
+  SetAttribute('Id', Value);
+end;
+
+function TXMLInfProt.Get_TpAmb: WideString;
+begin
+  Result := ChildNodes['tpAmb'].Text;
+end;
+
+procedure TXMLInfProt.Set_TpAmb(Value: WideString);
+begin
+  ChildNodes['tpAmb'].NodeValue := Value;
+end;
+
+function TXMLInfProt.Get_VerAplic: WideString;
+begin
+  Result := ChildNodes['verAplic'].Text;
+end;
+
+procedure TXMLInfProt.Set_VerAplic(Value: WideString);
+begin
+  ChildNodes['verAplic'].NodeValue := Value;
+end;
+
+function TXMLInfProt.Get_ChMDFe: WideString;
+begin
+  Result := ChildNodes['chMDFe'].Text;
+end;
+
+procedure TXMLInfProt.Set_ChMDFe(Value: WideString);
+begin
+  ChildNodes['chMDFe'].NodeValue := Value;
+end;
+
+function TXMLInfProt.Get_DhRecbto: WideString;
+begin
+  Result := ChildNodes['dhRecbto'].Text;
+end;
+
+procedure TXMLInfProt.Set_DhRecbto(Value: WideString);
+begin
+  ChildNodes['dhRecbto'].NodeValue := Value;
+end;
+
+function TXMLInfProt.Get_NProt: WideString;
+begin
+  Result := ChildNodes['nProt'].Text;
+end;
+
+procedure TXMLInfProt.Set_NProt(Value: WideString);
+begin
+  ChildNodes['nProt'].NodeValue := Value;
+end;
+
+function TXMLInfProt.Get_DigVal: WideString;
+begin
+  Result := ChildNodes['digVal'].Text;
+end;
+
+procedure TXMLInfProt.Set_DigVal(Value: WideString);
+begin
+  ChildNodes['digVal'].NodeValue := Value;
+end;
+
+function TXMLInfProt.Get_CStat: WideString;
+begin
+  Result := ChildNodes['cStat'].Text;
+end;
+
+procedure TXMLInfProt.Set_CStat(Value: WideString);
+begin
+  ChildNodes['cStat'].NodeValue := Value;
+end;
+
+function TXMLInfProt.Get_XMotivo: WideString;
+begin
+  Result := ChildNodes['xMotivo'].Text;
+end;
+
+procedure TXMLInfProt.Set_XMotivo(Value: WideString);
+begin
+  ChildNodes['xMotivo'].NodeValue := Value;
+end;
+
+{ TXMLInfFisco }
+
+function TXMLInfFisco.Get_CMsg: WideString;
+begin
+  Result := ChildNodes['cMsg'].Text;
+end;
+
+procedure TXMLInfFisco.Set_CMsg(Value: WideString);
+begin
+  ChildNodes['cMsg'].NodeValue := Value;
+end;
+
+function TXMLInfFisco.Get_XMsg: WideString;
+begin
+  Result := ChildNodes['xMsg'].Text;
+end;
+
+procedure TXMLInfFisco.Set_XMsg(Value: WideString);
+begin
+  ChildNodes['xMsg'].NodeValue := Value;
 end;
 
 { TXMLTRetEnviMDFe }
