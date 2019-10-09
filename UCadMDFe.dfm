@@ -212,8 +212,9 @@ object frmCadMDFe: TfrmCadMDFe
           Top = 0
           Width = 75
           Height = 25
-          Caption = 'Button1'
+          Caption = 'Salvar PDF'
           TabOrder = 7
+          Visible = False
           OnClick = Button1Click
         end
       end
@@ -683,7 +684,6 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'DESC_TIPO_EMITENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Emitente'
-            Width = 64
             Visible = True
           end
           item
@@ -691,7 +691,6 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'DESC_TIPO_TRANSPORTADOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Transportador'
-            Width = 64
             Visible = True
           end
           item
@@ -699,7 +698,6 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'DESC_MODALIDADE_TRANSP'
             Title.Alignment = taCenter
             Title.Caption = 'Modalidade Transp'
-            Width = 64
             Visible = True
           end
           item
@@ -707,7 +705,6 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'DESC_FORMA_EMISSAO'
             Title.Alignment = taCenter
             Title.Caption = 'Forma Emiss'#227'o'
-            Width = 64
             Visible = True
           end
           item
@@ -715,7 +712,6 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'NOME_INTERNO'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Filial (Emitente)'
-            Width = 64
             Visible = True
           end
           item
@@ -730,7 +726,6 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'PROTOCOLO_ENC'
             Title.Alignment = taCenter
             Title.Caption = 'Protocolo Encerramento'
-            Width = 64
             Visible = True
           end>
       end
@@ -1814,7 +1809,6 @@ object frmCadMDFe: TfrmCadMDFe
                   Title.Alignment = taCenter
                   Title.Caption = 'Cidade'
                   Title.Color = 12582847
-                  Width = 64
                   Visible = True
                 end>
             end
@@ -6055,8 +6049,8 @@ object frmCadMDFe: TfrmCadMDFe
     GroupName = 'MDFe'
     UserControl = fMenu.UserControl1
     NotAllowed = naDisabled
-    Left = 577
-    Top = 60
+    Left = 537
+    Top = 52
   end
   object PopupMenu1: TPopupMenu
     Left = 849
@@ -6075,8 +6069,6 @@ object frmCadMDFe: TfrmCadMDFe
     end
   end
   object ACBrMDFeDAMDFeRL1: TACBrMDFeDAMDFeRL
-    NomeDocumento = 'teste.pdf'
-    PathPDF = 'c:\'
     Sistema = 'SSFacil (MDFe)'
     MargemInferior = 0.800000000000000000
     MargemSuperior = 0.800000000000000000

@@ -1862,7 +1862,11 @@ begin
   else
   begin
     if fDMCadMDFe.qParametros_MDFeTIPO_IMPRESSAO.AsString = 'A' then
-      btnImprimir_ACBRClick(Sender)
+      begin
+        vNomeArqPDF := Monta_Diretorio('P',fDMCadMDFe.qParametros_MDFeENDXMLMDFE.AsString,fDMCadMDFe.cdsMDFeSERIE.AsString,
+                       YearOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime),MonthOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime));
+        btnImprimir_ACBRClick(Sender);
+      end
     else
       btnImprimir_FlexdocsClick(Sender);
   end;
@@ -2369,18 +2373,21 @@ begin
                      mStream,
                      mLogo,
                      mDAMDFe);
-
-  vNomeArq := ExtractFilePath(Application.ExeName) + 'Temp';
-  if not DirectoryExists(vNomeArq) then
-    CreateDir(vNomeArq);
-
-  vNomeArq := vNomeArq + '\DAMDFE_ENV_' + FormatDateTime('YYYYMMDD',Date) +  '_' + FormatDateTime('HHMMSS',Time) + '.pdf';
-  if FileExists(vNomeArq) then
-    DeleteFile(vNomeArq);
+  if vImp_MDFe = 'G' then
+    vNomeArq := vNomeArquivo
+  else
+  begin
+    vNomeArq := ExtractFilePath(Application.ExeName) + 'Temp';
+    if not DirectoryExists(vNomeArq) then
+      CreateDir(vNomeArq);
+    vNomeArq := vNomeArq + '\DAMDFE_ENV_' + FormatDateTime('YYYYMMDD',Date) +  '_' + FormatDateTime('HHMMSS',Time) + '.pdf';
+    if FileExists(vNomeArq) then
+      DeleteFile(vNomeArq);
+  end;
 
   mDAMDFe.Position := 0;
   mDAMDFe.SaveToFile(vNomeArq);
-
+                  
   ShellExecute(Application.Handle, 'Open', PChar(vNomeArq), nil, nil, SW_SHOWMAXIMIZED);
 
   FreeAndNil(mStream);
@@ -2398,10 +2405,11 @@ begin
 
   //if OpenDialog1.Execute then
   begin
+    ACBrMDFe1.DAMDFE.PathPDF := vNomeArqPDF;
     ACBrMDFe1.Manifestos.LoadFromString(fDMCadMDFe.cdsMDFeXML_ASSINADO_PROC.Value);
     ACBrMDFeDAMDFeRL1.Logo := fDMCadMDFe.qFilial_MDFeEND_LOG.AsString;
     if vImp_MDFe = 'G' then
-      ACBrMDFe1.Manifestos. ImprimirPDF
+      ACBrMDFe1.Manifestos.ImprimirPDF
     else
       ACBrMDFe1.Manifestos.Imprimir;
   end;
@@ -2415,6 +2423,9 @@ end;
 
 procedure TfrmCadMDFe.Button1Click(Sender: TObject);
 begin
+  vNomeArqPDF := Monta_Diretorio('P',fDMCadMDFe.qParametros_MDFeENDXMLMDFE.AsString,fDMCadMDFe.cdsMDFeSERIE.AsString,
+                 YearOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime),MonthOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime));
+
   vImp_MDFe := 'G';
   btnImprimir_ACBRClick(sender);
 
