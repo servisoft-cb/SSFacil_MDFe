@@ -1,6 +1,6 @@
 object frmCadMDFe: TfrmCadMDFe
-  Left = 238
-  Top = 21
+  Left = 248
+  Top = 42
   Width = 947
   Height = 669
   Caption = 'MDFe'
@@ -23,8 +23,8 @@ object frmCadMDFe: TfrmCadMDFe
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 939
-    Height = 638
+    Width = 931
+    Height = 630
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -42,7 +42,7 @@ object frmCadMDFe: TfrmCadMDFe
       object pnlPesquisa: TPanel
         Left = 0
         Top = 33
-        Width = 935
+        Width = 927
         Height = 47
         Align = alTop
         Color = clSilver
@@ -187,11 +187,40 @@ object frmCadMDFe: TfrmCadMDFe
           TabOrder = 4
           Visible = False
         end
+        object btnImprimir_Flexdocs: TBitBtn
+          Left = 680
+          Top = 16
+          Width = 94
+          Height = 25
+          Caption = 'Imprimir Flexdocs'
+          TabOrder = 5
+          Visible = False
+          OnClick = btnImprimir_FlexdocsClick
+        end
+        object btnImprimir_ACBR: TBitBtn
+          Left = 792
+          Top = 16
+          Width = 100
+          Height = 25
+          Caption = 'Imprimir ACBR'
+          TabOrder = 6
+          Visible = False
+          OnClick = btnImprimir_ACBRClick
+        end
+        object Button1: TButton
+          Left = 576
+          Top = 0
+          Width = 75
+          Height = 25
+          Caption = 'Button1'
+          TabOrder = 7
+          OnClick = Button1Click
+        end
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 598
-        Width = 935
+        Top = 590
+        Width = 927
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -207,7 +236,7 @@ object frmCadMDFe: TfrmCadMDFe
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 935
+        Width = 927
         Height = 33
         Align = alTop
         Color = clSilver
@@ -508,8 +537,8 @@ object frmCadMDFe: TfrmCadMDFe
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 115
-        Width = 935
-        Height = 459
+        Width = 927
+        Height = 451
         Align = alClient
         Ctl3D = False
         DataSource = DMCadMDFe.dsConsulta
@@ -654,6 +683,7 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'DESC_TIPO_EMITENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Emitente'
+            Width = 64
             Visible = True
           end
           item
@@ -661,6 +691,7 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'DESC_TIPO_TRANSPORTADOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Transportador'
+            Width = 64
             Visible = True
           end
           item
@@ -668,6 +699,7 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'DESC_MODALIDADE_TRANSP'
             Title.Alignment = taCenter
             Title.Caption = 'Modalidade Transp'
+            Width = 64
             Visible = True
           end
           item
@@ -675,6 +707,7 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'DESC_FORMA_EMISSAO'
             Title.Alignment = taCenter
             Title.Caption = 'Forma Emiss'#227'o'
+            Width = 64
             Visible = True
           end
           item
@@ -682,6 +715,7 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'NOME_INTERNO'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Filial (Emitente)'
+            Width = 64
             Visible = True
           end
           item
@@ -696,13 +730,14 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'PROTOCOLO_ENC'
             Title.Alignment = taCenter
             Title.Caption = 'Protocolo Encerramento'
+            Width = 64
             Visible = True
           end>
       end
       object pnlEnvio_Novo: TPanel
         Left = 0
         Top = 80
-        Width = 935
+        Width = 927
         Height = 35
         Align = alTop
         Color = 16770764
@@ -1088,8 +1123,8 @@ object frmCadMDFe: TfrmCadMDFe
       end
       object Panel14: TPanel
         Left = 0
-        Top = 574
-        Width = 935
+        Top = 566
+        Width = 927
         Height = 24
         Align = alBottom
         Color = clSilver
@@ -1181,7 +1216,7 @@ object frmCadMDFe: TfrmCadMDFe
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 935
+        Width = 927
         Height = 34
         Align = alTop
         Color = 8404992
@@ -1407,8 +1442,8 @@ object frmCadMDFe: TfrmCadMDFe
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 185
-        Width = 935
-        Height = 430
+        Width = 927
+        Height = 422
         ActivePage = TS_NFe
         ActivePageDefault = TS_NFe
         Align = alClient
@@ -1427,7 +1462,7 @@ object frmCadMDFe: TfrmCadMDFe
             Left = 0
             Top = 0
             Width = 291
-            Height = 407
+            Height = 399
             Align = alLeft
             BorderInner = fsButtonUp
             BorderOuter = fsBump
@@ -1447,7 +1482,7 @@ object frmCadMDFe: TfrmCadMDFe
               Left = 5
               Top = 61
               Width = 281
-              Height = 341
+              Height = 333
               Align = alClient
               BorderStyle = bsNone
               Ctl3D = False
@@ -1651,15 +1686,15 @@ object frmCadMDFe: TfrmCadMDFe
           object Panel13: TPanel
             Left = 291
             Top = 0
-            Width = 640
-            Height = 407
+            Width = 632
+            Height = 399
             Align = alClient
             TabOrder = 1
             object SMDBGrid2: TSMDBGrid
               Left = 1
               Top = 69
-              Width = 638
-              Height = 337
+              Width = 630
+              Height = 329
               Align = alClient
               BorderStyle = bsNone
               Ctl3D = False
@@ -1779,13 +1814,14 @@ object frmCadMDFe: TfrmCadMDFe
                   Title.Alignment = taCenter
                   Title.Caption = 'Cidade'
                   Title.Color = 12582847
+                  Width = 64
                   Visible = True
                 end>
             end
             object pnlNFe: TPanel
               Left = 1
               Top = 1
-              Width = 638
+              Width = 630
               Height = 68
               Align = alTop
               BevelOuter = bvNone
@@ -2061,15 +2097,15 @@ object frmCadMDFe: TfrmCadMDFe
           object pnlCarregamento: TPanel
             Left = 0
             Top = 0
-            Width = 931
-            Height = 407
+            Width = 923
+            Height = 399
             Align = alClient
             Enabled = False
             TabOrder = 0
             object RzGroupBox8: TRzGroupBox
               Left = 1
               Top = 1
-              Width = 929
+              Width = 921
               Height = 41
               Align = alTop
               BorderColor = clMaroon
@@ -2136,7 +2172,7 @@ object frmCadMDFe: TfrmCadMDFe
               Left = 1
               Top = 42
               Width = 344
-              Height = 364
+              Height = 356
               Align = alLeft
               BorderColor = clNavy
               BorderInner = fsButtonUp
@@ -2334,7 +2370,7 @@ object frmCadMDFe: TfrmCadMDFe
                 Left = 5
                 Top = 51
                 Width = 334
-                Height = 308
+                Height = 300
                 Align = alClient
                 BorderStyle = bsNone
                 Ctl3D = False
@@ -2364,7 +2400,7 @@ object frmCadMDFe: TfrmCadMDFe
               Left = 345
               Top = 42
               Width = 197
-              Height = 364
+              Height = 356
               Align = alLeft
               BorderColor = clNavy
               BorderInner = fsButtonUp
@@ -2561,7 +2597,7 @@ object frmCadMDFe: TfrmCadMDFe
                 Left = 5
                 Top = 50
                 Width = 187
-                Height = 309
+                Height = 301
                 Align = alClient
                 BorderStyle = bsNone
                 Ctl3D = False
@@ -2590,8 +2626,8 @@ object frmCadMDFe: TfrmCadMDFe
             object RzGroupBox5: TRzGroupBox
               Left = 542
               Top = 42
-              Width = 388
-              Height = 364
+              Width = 380
+              Height = 356
               Align = alClient
               BorderColor = clNavy
               BorderInner = fsButtonUp
@@ -2612,7 +2648,7 @@ object frmCadMDFe: TfrmCadMDFe
               object Panel7: TPanel
                 Left = 5
                 Top = 18
-                Width = 378
+                Width = 370
                 Height = 32
                 Align = alTop
                 BevelOuter = bvNone
@@ -2787,8 +2823,8 @@ object frmCadMDFe: TfrmCadMDFe
               object RzDBGrid3: TRzDBGrid
                 Left = 5
                 Top = 50
-                Width = 378
-                Height = 309
+                Width = 370
+                Height = 301
                 Align = alClient
                 BorderStyle = bsNone
                 Ctl3D = False
@@ -2821,8 +2857,8 @@ object frmCadMDFe: TfrmCadMDFe
           object RzPageControl3: TRzPageControl
             Left = 0
             Top = 20
-            Width = 931
-            Height = 387
+            Width = 923
+            Height = 379
             ActivePage = TS_Veiculo
             ActivePageDefault = TS_Veiculo
             Align = alClient
@@ -2834,8 +2870,8 @@ object frmCadMDFe: TfrmCadMDFe
               object RzGroupBox6: TRzGroupBox
                 Left = 0
                 Top = 49
-                Width = 927
-                Height = 315
+                Width = 919
+                Height = 307
                 Align = alClient
                 BorderColor = clNavy
                 BorderInner = fsButtonUp
@@ -2856,7 +2892,7 @@ object frmCadMDFe: TfrmCadMDFe
                 object Panel4: TPanel
                   Left = 5
                   Top = 18
-                  Width = 917
+                  Width = 909
                   Height = 33
                   Align = alTop
                   BevelOuter = bvNone
@@ -3039,8 +3075,8 @@ object frmCadMDFe: TfrmCadMDFe
                 object RzDBGrid4: TRzDBGrid
                   Left = 5
                   Top = 51
-                  Width = 917
-                  Height = 259
+                  Width = 909
+                  Height = 251
                   Align = alClient
                   BorderStyle = bsNone
                   Ctl3D = False
@@ -3078,7 +3114,7 @@ object frmCadMDFe: TfrmCadMDFe
               object pnlVeiculoTracao: TPanel
                 Left = 0
                 Top = 0
-                Width = 927
+                Width = 919
                 Height = 49
                 Align = alTop
                 BevelOuter = bvNone
@@ -3153,7 +3189,7 @@ object frmCadMDFe: TfrmCadMDFe
               object Panel8: TPanel
                 Left = 0
                 Top = 0
-                Width = 927
+                Width = 919
                 Height = 35
                 Align = alTop
                 BevelOuter = bvNone
@@ -3330,8 +3366,8 @@ object frmCadMDFe: TfrmCadMDFe
               object RzDBGrid5: TRzDBGrid
                 Left = 0
                 Top = 35
-                Width = 927
-                Height = 329
+                Width = 919
+                Height = 321
                 Align = alClient
                 BorderStyle = bsNone
                 Ctl3D = False
@@ -3390,7 +3426,7 @@ object frmCadMDFe: TfrmCadMDFe
               object Panel9: TPanel
                 Left = 0
                 Top = 0
-                Width = 927
+                Width = 919
                 Height = 51
                 Align = alTop
                 BevelOuter = bvNone
@@ -3625,8 +3661,8 @@ object frmCadMDFe: TfrmCadMDFe
               object RzDBGrid6: TRzDBGrid
                 Left = 0
                 Top = 51
-                Width = 927
-                Height = 313
+                Width = 919
+                Height = 305
                 Align = alClient
                 BorderStyle = bsNone
                 Ctl3D = False
@@ -3887,7 +3923,7 @@ object frmCadMDFe: TfrmCadMDFe
               object Panel12: TPanel
                 Left = 0
                 Top = 0
-                Width = 927
+                Width = 919
                 Height = 93
                 Align = alTop
                 BevelOuter = bvNone
@@ -4181,8 +4217,8 @@ object frmCadMDFe: TfrmCadMDFe
               object RzDBGrid9: TRzDBGrid
                 Left = 0
                 Top = 93
-                Width = 927
-                Height = 271
+                Width = 919
+                Height = 263
                 Align = alClient
                 BorderStyle = bsNone
                 Ctl3D = False
@@ -4448,7 +4484,7 @@ object frmCadMDFe: TfrmCadMDFe
           object RzSizePanel1: TRzSizePanel
             Left = 0
             Top = 0
-            Width = 931
+            Width = 923
             Height = 20
             Align = alTop
             TabOrder = 1
@@ -4714,7 +4750,7 @@ object frmCadMDFe: TfrmCadMDFe
           object pnlEnvioMDFe: TPanel
             Left = 0
             Top = 0
-            Width = 931
+            Width = 923
             Height = 81
             Align = alTop
             BevelOuter = bvNone
@@ -5681,7 +5717,7 @@ object frmCadMDFe: TfrmCadMDFe
       object pnlDocumento: TPanel
         Left = 0
         Top = 65
-        Width = 935
+        Width = 927
         Height = 120
         Align = alTop
         Enabled = False
@@ -5963,7 +5999,7 @@ object frmCadMDFe: TfrmCadMDFe
       object pnlNota: TPanel
         Left = 0
         Top = 34
-        Width = 935
+        Width = 927
         Height = 31
         Align = alTop
         Color = clSilver
@@ -6033,5 +6069,47 @@ object frmCadMDFe: TfrmCadMDFe
       Caption = 'Encerrar'
       OnClick = Encerrar1Click
     end
+    object ImprimirSemQRCode1: TMenuItem
+      Caption = 'Imprimir Sem QRCode'
+      OnClick = ImprimirSemQRCode1Click
+    end
+  end
+  object ACBrMDFeDAMDFeRL1: TACBrMDFeDAMDFeRL
+    NomeDocumento = 'teste.pdf'
+    PathPDF = 'c:\'
+    Sistema = 'SSFacil (MDFe)'
+    MargemInferior = 0.800000000000000000
+    MargemSuperior = 0.800000000000000000
+    MargemEsquerda = 0.600000000000000000
+    MargemDireita = 0.510000000000000000
+    CasasDecimais.Formato = tdetInteger
+    CasasDecimais.qCom = 2
+    CasasDecimais.vUnCom = 2
+    CasasDecimais.MaskqCom = ',0.00'
+    CasasDecimais.MaskvUnCom = ',0.00'
+    ACBrMDFe = ACBrMDFe1
+    ImprimeHoraSaida = False
+    TipoDAMDFe = tiSemGeracao
+    TamanhoPapel = tpA4
+    Cancelada = False
+    Encerrado = False
+    PrintDialog = True
+    Left = 534
+    Top = 307
+  end
+  object ACBrMDFe1: TACBrMDFe
+    Configuracoes.Geral.SSLLib = libCapicom
+    Configuracoes.Geral.SSLCryptLib = cryCapicom
+    Configuracoes.Geral.SSLHttpLib = httpWinINet
+    Configuracoes.Geral.SSLXmlSignLib = xsMsXmlCapicom
+    Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
+    Configuracoes.Arquivos.OrdenacaoPath = <>
+    Configuracoes.WebServices.UF = 'SP'
+    Configuracoes.WebServices.AguardarConsultaRet = 0
+    Configuracoes.WebServices.QuebradeLinha = '|'
+    Configuracoes.RespTec.IdCSRT = 0
+    DAMDFE = ACBrMDFeDAMDFeRL1
+    Left = 466
+    Top = 297
   end
 end

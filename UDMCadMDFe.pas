@@ -583,6 +583,8 @@ type
     qNotasPdxcidade: TStringField;
     qNotasPdxDtEmissao: TDateField;
     qExec: TQuery;
+    qFilial_MDFeEND_LOG: TStringField;
+    qParametros_MDFeTIPO_IMPRESSAO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspMDFeUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

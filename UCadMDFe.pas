@@ -3,10 +3,14 @@ UNIT UCadMDFe;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadMDFe, DBGrids,
-  ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl, RzEdit,
-  RzDBEdit, RzButton, UEscolhe_Filial, UCBase, RzPanel, dbXPress, NxCollection, DateUtils, DB, Menus, NxEdit, RzSplit,
-  NxColumns, NxDBColumns, NxScrollControl, RzCmboBx, RzDBCmbo, RzDBBnEd, RzDBSpin, RzRadGrp, RzDBRGrp, RzDBGrid, UDMEnvio;
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons,
+  Grids, SMDBGrid, UDMCadMDFe, DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs,
+  Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl, RzEdit, RzDBEdit,
+  RzButton, UEscolhe_Filial, UCBase, RzPanel, dbXPress, NxCollection, DateUtils, DB,
+  Menus, NxEdit, RzSplit, NxColumns, NxDBColumns, NxScrollControl, RzCmboBx, RzDBCmbo,
+  RzDBBnEd, RzDBSpin, RzRadGrp, RzDBRGrp, RzDBGrid, UDMEnvio, ShellApi,
+  ACBrBase, ACBrDFeReport, ACBrMDFeDAMDFeClass, ACBrMDFeDAMDFeRLClass,
+  ACBrDFe, ACBrMDFe;
 
 type
   TfrmCadMDFe = class(TForm)
@@ -253,6 +257,12 @@ type
     PopupMenu1: TPopupMenu;
     Buscar1: TMenuItem;
     Encerrar1: TMenuItem;
+    btnImprimir_Flexdocs: TBitBtn;
+    ACBrMDFeDAMDFeRL1: TACBrMDFeDAMDFeRL;
+    btnImprimir_ACBR: TBitBtn;
+    ACBrMDFe1: TACBrMDFe;
+    ImprimirSemQRCode1: TMenuItem;
+    Button1: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -331,6 +341,10 @@ type
     procedure DBEdit2DblClick(Sender: TObject);
     procedure Buscar1Click(Sender: TObject);
     procedure Encerrar1Click(Sender: TObject);
+    procedure btnImprimir_FlexdocsClick(Sender: TObject);
+    procedure btnImprimir_ACBRClick(Sender: TObject);
+    procedure ImprimirSemQRCode1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     vTipo_Reg: String;
@@ -341,6 +355,7 @@ type
     vNomeArquivo: String;
     vNomeArqPDF: String;
     vUF_Ant: String;
+    vImp_MDFe : String;//G=Gravar   I=Imprimir
 
     fDMCadMDFe: TDMCadMDFe;
     fDMEnvio: TDMEnvio;
@@ -445,7 +460,6 @@ var
   ID: TTransactionDesc;
   vID_LocalAux: Integer;
   sds: TSQLDataSet;
-  sds2: TSQLDataSet;
   vNumManifesto: Integer;
 begin
   vIDAux := fDMCadMDFe.cdsMDFeID.AsInteger;
@@ -467,7 +481,6 @@ begin
   fDMCadMDFe.cdsMDFe.Locate('ID',vIDAux,[loCaseInsensitive]);
 
   sds  := TSQLDataSet.Create(nil);
-  sds2 := TSQLDataSet.Create(nil);
   ID.TransactionID  := 1;
   ID.IsolationLevel := xilREADCOMMITTED;
   dmDatabase.scoDados.StartTransaction(ID);
@@ -1541,7 +1554,7 @@ begin
 //    exit;
 
   fDMEnvio := TDMEnvio.Create(Self);
-  try                                          
+  try
     fDMEnvio.cdsMDFe.Close;
     fDMEnvio.sdsMDFe.ParamByName('ID').AsInteger := fDMCadMDFe.cdsMDFeID.AsInteger;
     fDMEnvio.cdsMDFe.Open;
@@ -1843,7 +1856,16 @@ end;
 
 procedure TfrmCadMDFe.btnDanfeClick(Sender: TObject);
 begin
-  prc_Imprimir_Danfe('I');
+  vImp_MDFe := 'I';
+  if trim(fDMCadMDFe.cdsConsultaCHAVE_ACESSO.AsString) = '' then
+    prc_Imprimir_Danfe('I')
+  else
+  begin
+    if fDMCadMDFe.qParametros_MDFeTIPO_IMPRESSAO.AsString = 'A' then
+      btnImprimir_ACBRClick(Sender)
+    else
+      btnImprimir_FlexdocsClick(Sender);
+  end;
 end;
 
 procedure TfrmCadMDFe.btnDanfeExit(Sender: TObject);
@@ -2144,6 +2166,8 @@ begin
     ckSalvarXML.Caption := ExtractFilePath(Application.ExeName) + 'Temp\';
     ckSalvarXML.Visible := not(ckSalvarXML.Visible);
     btnOutros.Visible   := not(btnOutros.Visible);
+    btnImprimir_Flexdocs.Visible := not(btnImprimir_Flexdocs.Visible);
+    btnImprimir_ACBR.Visible     := not(btnImprimir_ACBR.Visible);
   end;
 end;
 
@@ -2218,7 +2242,7 @@ end;
 
 procedure TfrmCadMDFe.Buscar1Click(Sender: TObject);
 var
-  recibo, protocolo: string;
+  recibo: string;
   Xml: TMemoryStream;
   //sXml: TStringStream;
   vCNPjAux: String;
@@ -2269,9 +2293,15 @@ begin
     begin
       vNomeArqPDF := Monta_Diretorio('P',fDMCadMDFe.qParametros_MDFeENDXMLMDFE.AsString,fDMCadMDFe.cdsMDFeSERIE.AsString,
                      YearOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime),MonthOf(fDMCadMDFe.cdsMDFeDTEMISSAO.AsDateTime));
+      vImp_MDFe := 'G';
       if FileExists(vNomeArqPDF) then
         DeleteFile(vNomeArqPDF);
-      prc_Imprimir_Danfe('E');
+      if fDMCadMDFe.qParametros_MDFeTIPO_IMPRESSAO.AsString = 'A' then
+        btnImprimir_ACBRClick(Sender)
+      else
+        btnImprimir_FlexdocsClick(Sender);
+      //era o manual   09/10/2019
+      //prc_Imprimir_Danfe('E');
     end;
     //**************
 
@@ -2301,6 +2331,93 @@ begin
   frmEncerrar_MDFe.fDMCadMDFe := fDMCadMDFe;
   frmEncerrar_MDFe.ShowModal;
   FreeAndNil(frmEncerrar_MDFe);
+end;
+
+procedure TfrmCadMDFe.btnImprimir_FlexdocsClick(Sender: TObject);
+var
+  mStream: TMemoryStream;
+  mDAMDFe: TMemoryStream;
+  vCNPJAux : string;
+  mLogo: TMemoryStream;
+  vNomeArq: String;
+begin
+  if not(fDMCadMDFe.cdsConsulta.Active) or (fDMCadMDFe.cdsConsulta.IsEmpty) then
+    exit;
+
+  prc_Posiciona_MDFe;
+
+  mStream := TMemoryStream.Create;
+  mDAMDFe := TMemoryStream.Create;
+  mLogo   := TMemoryStream.Create;
+  mStream.Position := 0;
+  mDAMDFe.Position := 0;
+  mLogo.Position   := 0;
+
+  fDMCadMDFe.cdsMDFeXML_ASSINADO_PROC.SaveToStream(mStream);
+  mStream.Position := 0;
+
+  mlogo.LoadFromFile(fDMCadMDFe.qFilial_MDFeEND_LOG.AsString);
+
+  fDMCadMDFe.cdsFilial.Locate('ID',fDMCadMDFe.cdsMDFeFILIAL.AsInteger,[loCaseInsensitive]);
+
+  vCNPJAux := Monta_Numero(fDMCadMDFe.cdsFilialCNPJ_CPF.AsString,0);
+
+  MDFe_GerarPDF(trim(fnc_LocalServidorNFe_Local),
+                     vCNPJAux,
+                     '',
+                     'SSFacil (MDFe)',
+                     mStream,
+                     mLogo,
+                     mDAMDFe);
+
+  vNomeArq := ExtractFilePath(Application.ExeName) + 'Temp';
+  if not DirectoryExists(vNomeArq) then
+    CreateDir(vNomeArq);
+
+  vNomeArq := vNomeArq + '\DAMDFE_ENV_' + FormatDateTime('YYYYMMDD',Date) +  '_' + FormatDateTime('HHMMSS',Time) + '.pdf';
+  if FileExists(vNomeArq) then
+    DeleteFile(vNomeArq);
+
+  mDAMDFe.Position := 0;
+  mDAMDFe.SaveToFile(vNomeArq);
+
+  ShellExecute(Application.Handle, 'Open', PChar(vNomeArq), nil, nil, SW_SHOWMAXIMIZED);
+
+  FreeAndNil(mStream);
+  FreeAndNil(mDAMDFe);
+  FreeAndNil(mLogo);
+
+end;
+
+procedure TfrmCadMDFe.btnImprimir_ACBRClick(Sender: TObject);
+begin
+  if not(fDMCadMDFe.cdsConsulta.Active) or (fDMCadMDFe.cdsConsulta.IsEmpty) then
+    exit;
+
+  prc_Posiciona_MDFe;
+
+  //if OpenDialog1.Execute then
+  begin
+    ACBrMDFe1.Manifestos.LoadFromString(fDMCadMDFe.cdsMDFeXML_ASSINADO_PROC.Value);
+    ACBrMDFeDAMDFeRL1.Logo := fDMCadMDFe.qFilial_MDFeEND_LOG.AsString;
+    if vImp_MDFe = 'G' then
+      ACBrMDFe1.Manifestos. ImprimirPDF
+    else
+      ACBrMDFe1.Manifestos.Imprimir;
+  end;
+
+end;
+
+procedure TfrmCadMDFe.ImprimirSemQRCode1Click(Sender: TObject);
+begin
+  prc_Imprimir_Danfe('I')
+end;
+
+procedure TfrmCadMDFe.Button1Click(Sender: TObject);
+begin
+  vImp_MDFe := 'G';
+  btnImprimir_ACBRClick(sender);
+
 end;
 
 end.

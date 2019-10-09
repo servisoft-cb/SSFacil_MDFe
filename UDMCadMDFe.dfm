@@ -1152,6 +1152,10 @@ object DMCadMDFe: TDMCadMDFe
       FieldName = 'SERIE'
       Size = 3
     end
+    object qFilial_MDFeEND_LOG: TStringField
+      FieldName = 'END_LOG'
+      Size = 200
+    end
   end
   object sdsSeguradora: TSQLDataSet
     NoMetadata = True
@@ -2648,6 +2652,11 @@ object DMCadMDFe: TDMCadMDFe
     end
     object qParametros_MDFeUSA_PARADOX: TStringField
       FieldName = 'USA_PARADOX'
+      Size = 1
+    end
+    object qParametros_MDFeTIPO_IMPRESSAO: TStringField
+      FieldName = 'TIPO_IMPRESSAO'
+      FixedChar = True
       Size = 1
     end
   end
