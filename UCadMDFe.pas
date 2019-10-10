@@ -2405,6 +2405,7 @@ begin
 
   //if OpenDialog1.Execute then
   begin
+    ACBrMDFe1.Manifestos.Clear;
     ACBrMDFe1.DAMDFE.PathPDF := vNomeArqPDF;
     ACBrMDFe1.Manifestos.LoadFromString(fDMCadMDFe.cdsMDFeXML_ASSINADO_PROC.Value);
     ACBrMDFeDAMDFeRL1.Logo := fDMCadMDFe.qFilial_MDFeEND_LOG.AsString;
