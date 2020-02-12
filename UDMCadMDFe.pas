@@ -585,6 +585,11 @@ type
     qExec: TQuery;
     qFilial_MDFeEND_LOG: TStringField;
     qParametros_MDFeTIPO_IMPRESSAO: TStringField;
+    mAuxEvento: TClientDataSet;
+    mAuxEventoCodEvento: TStringField;
+    mAuxEventoNomeEvento: TStringField;
+    mAuxEventoDtRegistro: TStringField;
+    mAuxEventoNumProtocolo: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspMDFeUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

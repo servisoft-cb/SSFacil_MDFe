@@ -3000,4 +3000,33 @@ object DMCadMDFe: TDMCadMDFe
     Left = 440
     Top = 520
   end
+  object mAuxEvento: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 672
+    Top = 528
+    Data = {
+      970000009619E0BD010000001800000004000000000003000000970009436F64
+      4576656E746F01004900000001000557494454480200020007000A4E6F6D6545
+      76656E746F01004900000001000557494454480200020028000A447452656769
+      7374726F0100490000000100055749445448020002001E000C4E756D50726F74
+      6F636F6C6F01004900000001000557494454480200020028000000}
+    object mAuxEventoCodEvento: TStringField
+      FieldName = 'CodEvento'
+      Size = 7
+    end
+    object mAuxEventoNomeEvento: TStringField
+      FieldName = 'NomeEvento'
+      Size = 40
+    end
+    object mAuxEventoDtRegistro: TStringField
+      FieldName = 'DtRegistro'
+      Size = 30
+    end
+    object mAuxEventoNumProtocolo: TStringField
+      FieldName = 'NumProtocolo'
+      Size = 40
+    end
+  end
 end

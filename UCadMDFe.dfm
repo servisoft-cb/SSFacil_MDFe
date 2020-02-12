@@ -1211,6 +1211,34 @@ object frmCadMDFe: TfrmCadMDFe
           ParentFont = False
         end
       end
+      object mmoMDFeRetorno: TMemo
+        Left = 56
+        Top = 200
+        Width = 385
+        Height = 241
+        Lines.Strings = (
+          'mmoMDFeRetorno')
+        ScrollBars = ssVertical
+        TabOrder = 6
+      end
+      object mMemo1: TMemo
+        Left = 496
+        Top = 200
+        Width = 393
+        Height = 241
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 7
+      end
+      object BitBtn2: TBitBtn
+        Left = 192
+        Top = 248
+        Width = 75
+        Height = 25
+        Caption = 'BitBtn2'
+        TabOrder = 8
+      end
     end
     object TS_Cadastro: TRzTabSheet
       Caption = 'Cadastro'
@@ -6073,6 +6101,10 @@ object frmCadMDFe: TfrmCadMDFe
     object ImprimirSemQRCode1: TMenuItem
       Caption = 'Imprimir Sem QRCode'
       OnClick = ImprimirSemQRCode1Click
+    end
+    object Consultar1: TMenuItem
+      Caption = 'Consultar'
+      OnClick = Consultar1Click
     end
   end
   object ACBrMDFeDAMDFeRL1: TACBrMDFeDAMDFeRL
