@@ -8,9 +8,9 @@ uses
   Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl, RzEdit, RzDBEdit,
   RzButton, UEscolhe_Filial, UCBase, RzPanel, dbXPress, NxCollection, DateUtils, DB,
   Menus, NxEdit, RzSplit, NxColumns, NxDBColumns, NxScrollControl, RzCmboBx, RzDBCmbo,
-  RzDBBnEd, RzDBSpin, RzRadGrp, RzDBRGrp, RzDBGrid, UDMEnvio, ShellApi,
+  RzDBBnEd, RzDBSpin, RzRadGrp, RzDBRGrp, RzDBGrid, UDMEnvio, ShellApi,UEventos_MDFe,
   ACBrBase, ACBrDFeReport, ACBrMDFeDAMDFeClass, ACBrMDFeDAMDFeRLClass,
-  ACBrDFe, ACBrMDFe, XMLDoc, StrUtils;
+  ACBrDFe, ACBrMDFe, XMLDoc, StrUtils, pmdfeConversaoMDFe, ACBrUtil, pcnConversao;
 
 type
   TfrmCadMDFe = class(TForm)
@@ -264,9 +264,7 @@ type
     ImprimirSemQRCode1: TMenuItem;
     Button1: TButton;
     Consultar1: TMenuItem;
-    mmoMDFeRetorno: TMemo;
-    mMemo1: TMemo;
-    BitBtn2: TBitBtn;
+    BuscarChave1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -350,6 +348,7 @@ type
     procedure ImprimirSemQRCode1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Consultar1Click(Sender: TObject);
+    procedure BuscarChave1Click(Sender: TObject);
   private
     { Private declarations }
     mMDFe: TMemoryStream;
@@ -360,9 +359,11 @@ type
     vUF_Ant: String;
     vImp_MDFe : String;//G=Gravar   I=Imprimir
     vXML : TStringStream;
+    vDate : TDateTime;
 
     fDMCadMDFe: TDMCadMDFe;
     fDMEnvio: TDMEnvio;
+    ffrmEventosMDFe: TfrmEventosMDFe;
 
     //ffrmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens;
     ffrmEscolhe_Filial: TfrmEscolhe_Filial;
@@ -380,6 +381,7 @@ type
 
     procedure prc_Recalcular;
 
+    procedure ConfigurarComponente;
     procedure prc_Gravar_Envio;
     procedure prc_gravar_Busca;
     procedure prc_Gravar_Encerramento;
@@ -668,6 +670,8 @@ begin
 end;
 
 procedure TfrmCadMDFe.btnAlterarClick(Sender: TObject);
+var
+  vStatus : String;
 begin
   if not(fDMCadMDFe.cdsMDFe.Active) or (fDMCadMDFe.cdsMDFe.IsEmpty) or (fDMCadMDFe.cdsMDFeID.AsInteger < 1) then
     exit;
@@ -681,11 +685,18 @@ begin
   begin
     if MessageDlg('MDFe possui Recibo, deseja alterar o registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
       exit;
+    ConfigurarComponente;
+
+    ACBrMDFe1.WebServices.Recibo.Recibo := fDMCadMDFe.cdsMDFeRECIBO_MDFE.AsString;
+    ACBrMDFe1.WebServices.Recibo.Executar;
+    vStatus := IntToStr(ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].cStat);
   end;
+
 
   fDMCadMDFe.cdsMDFe.Edit;
   //TS_Consulta.TabEnabled := False;
-  if trim(fDMCadMDFe.cdsMDFeRECIBO_MDFE.AsString) <> '' then
+
+  if (trim(fDMCadMDFe.cdsMDFeRECIBO_MDFE.AsString) <> EmptyStr) and (vStatus <> '100') then
     fDMCadMDFe.cdsMDFeRECIBO_MDFE.AsString := '';
   prc_Habilitar_CamposNota;
   fDMCadMDFe.cdsNotas.Close;
@@ -1642,7 +1653,8 @@ end;
 procedure TfrmCadMDFe.prc_gravar_Busca;
 begin
   fDMCadMDFe.cdsMDFe.Edit;
-  fDMCadMDFe.cdsMDFeXML_ASSINADO_PROC.LoadFromStream(mMDFe);
+  if Assigned(mMDFe) then
+    fDMCadMDFe.cdsMDFeXML_ASSINADO_PROC.LoadFromStream(mMDFe);
   if trim(vProtocolo_MDFe) <> '' then
   begin
     fDMCadMDFe.cdsMDFePROTOCOLO_MDFE.AsString   := vProtocolo_MDFe;
@@ -1739,7 +1751,8 @@ end;
 procedure TfrmCadMDFe.prc_Gravar_Encerramento;
 begin
   fDMCadMDFe.cdsMDFe.Edit;
-  fDMCadMDFe.cdsMDFeXML_ENCERRAMENTO.LoadFromStream(mMDFe);
+  if Assigned(mMDFe) then
+    fDMCadMDFe.cdsMDFeXML_ENCERRAMENTO.LoadFromStream(mMDFe);
   fDMCadMDFe.cdsMDFeDTENCERRAMENTO.AsDateTime := Date;
   fDMCadMDFe.cdsMDFePROTOCOLO_ENC.AsString    := vProtocolo_MDFe;
   fDMCadMDFe.cdsMDFeDTPROTOCOLO_ENC.AsString  := vDtProtocolo_MDFe;
@@ -1810,7 +1823,7 @@ begin
   fDMCadMDFe.cdsMDFePROTOCOLO_CANC.AsString := vProtocolo_MDFe;
   fDMCadMDFe.cdsMDFeDTPROTOCOLO_CANC.AsString := vDtProtocolo_MDFe;
   fDMCadMDFe.cdsMDFeMOTIVO_CANC.AsString    := vMotivo_Canc;
-  fDMCadMDFe.cdsMDFeDTCANCELAMENTO.AsDateTime := Date;
+  fDMCadMDFe.cdsMDFeDTCANCELAMENTO.AsDateTime := vDate;
   fDMCadMDFe.cdsMDFe.Post;
   fDMCadMDFe.cdsMDFe.ApplyUpdates(0);
 end;
@@ -2440,84 +2453,93 @@ end;
 procedure TfrmCadMDFe.Consultar1Click(Sender: TObject);
 var
   chave: string;
-  Xml: TMemoryStream;
-  sXml: TStringStream;
-  vCNPJAux : String;
+  i, j : Integer;
 begin
   if not(fDMCadMDFe.cdsConsulta.Active) or (fDMCadMDFe.cdsConsulta.IsEmpty) then
     exit;
 
-  fDMCadMDFe.mAuxEvento.EmptyDataSet;
   prc_Posiciona_MDFe;
 
   chave := InputBox('Informe a chave', 'Chave',fDMCadMDFe.cdsMDFeCHAVE_ACESSO.AsString );
 
-  Xml := TMemoryStream.Create;
+  fDMCadMDFe.mAuxEvento.Close;
+  fDMCadMDFe.mAuxEvento.CreateDataSet;
+  fDMCadMDFe.mAuxEvento.EmptyDataSet;
+  ConfigurarComponente;
+
+  ACBrMDFe1.Manifestos.Clear;
+  ACBrMDFe1.WebServices.Consulta.MDFeChave := Chave;
+  ACBrMDFe1.WebServices.Consulta.Executar;
+
+//  ACBrMDFe1.Manifestos.LoadFromString(ACBrMDFe1.WebServices.Consulta.RetornoWS);
+
+//  ACBrMDFe1.WebServices.Consulta.procEventoMDFe.First;
+  for i := 0 to ACBrMDFe1.WebServices.Consulta.procEventoMDFe.Count -1 do
+  begin
+    for j := 0 to ACBrMDFe1.WebServices.Consulta.procEventoMDFe.Items[i].RetEventoMDFe.retEvento.Count -1 do
+    begin
+      fDMCadMDFe.mAuxEvento.Insert;
+      fDMCadMDFe.mAuxEventoCodEvento.AsString := TpEventoToStr(ACBrMDFe1.WebServices.Consulta.procEventoMDFe.Items[i].RetEventoMDFe.retEvento.Items[j].RetInfEvento.tpEvento);
+      fDMCadMDFe.mAuxEventoDtRegistro.AsString := FormatDateTime('dd-mm-yyyy hh:mm',ACBrMDFe1.WebServices.Consulta.procEventoMDFe.Items[i].RetEventoMDFe.retEvento.Items[j].RetInfEvento.dhRegEvento);
+      fDMCadMDFe.mAuxEventoNomeEvento.AsString := ACBrMDFe1.WebServices.Consulta.procEventoMDFe.Items[i].RetEventoMDFe.retEvento.Items[j].RetInfEvento.xEvento;
+      fDMCadMDFe.mAuxEventoNumProtocolo.AsString := ACBrMDFe1.WebServices.Consulta.procEventoMDFe.Items[i].RetEventoMDFe.retEvento.Items[j].RetInfEvento.nProt;
+      fDMCadMDFe.mAuxEvento.Post;
+    end;
+  end;
+
+  if fDMCadMDFe.mAuxEvento.IsEmpty then
+    exit;
+
   try
-    vCNPjAux := Monta_Numero(fDMCadMDFe.cdsFilialCNPJ_CPF.AsString,0);
-    MDFe_Consultar(fnc_LocalServidorNFe_Local,
-                   vCNPjAux,
-                   chave,
-                   Xml);
-
-    sXml := TStringStream.Create('');
-    vXml := TStringStream.Create('');
-    try
-      Xml.Position := 0;
-      Xml.SaveToStream(sXml);
-      Xml.SaveToStream(vXml);
-
-      prc_Monta_Eventos;
-
-      mmoMDFeRetorno.Lines.Add('Consulta Situação: ' + chave);
-      mmoMDFeRetorno.Lines.Add( FormatXMLData(sXml.DataString) );
-      mmoMDFeRetorno.Lines.Add('----------------------------------------------------------------------------');
-    finally
-      FreeAndNil(sXml);
-      FreeAndNil(vXml);
+    ffrmEventosMDFe := TfrmEventosMDFe.Create(nil);
+    ffrmEventosMDFe.fDMCadMDFe := fDMCadMDFe;
+    ffrmEventosMDFe.ShowModal;
+    if ffrmEventosMDFe.ModalResult = mrOk then
+    begin
+      if fDMCadMDFe.mAuxEvento.Locate('NomeEvento','Encerramento',[loCaseInsensitive]) then
+      begin
+        vProtocolo_MDFe := fDMCadMDFe.mAuxEventoNumProtocolo.AsString;
+        vDtProtocolo_MDFe := fDMCadMDFe.mAuxEventoDtRegistro.AsString;
+        prc_Gravar_Encerramento;
+      end;
     end;
   finally
-    FreeAndNil(Xml);
+     FreeAndNil(ffrmEventosMDFe);
   end;
+
+
+//Desativei porque foi implementado o método acima pelo acbr - Russimar
+//  Xml := TMemoryStream.Create;
+//  try
+//    vCNPjAux := Monta_Numero(fDMCadMDFe.cdsFilialCNPJ_CPF.AsString,0);
+//    MDFe_Consultar(fnc_LocalServidorNFe_Local,
+//                   vCNPjAux,
+//                   chave,
+//                   Xml);
+//
+//    sXml := TStringStream.Create('');
+//    vXml := TStringStream.Create('');
+//    try
+//      Xml.Position := 0;
+//      Xml.SaveToStream(sXml);
+//      Xml.SaveToStream(vXml);
+//
+//      prc_Monta_Eventos;
+//
+//    finally
+//      FreeAndNil(sXml);
+//      FreeAndNil(vXml);
+//    end;
+//  finally
+//    FreeAndNil(Xml);
+//  end;
 
 end;
 
 procedure TfrmCadMDFe.prc_Monta_Eventos;
-var
-  i, i2, i3: Integer;
-  vTexto : WideString;
-  tpEvento : String;
-  xEvento: String;
-  dhRegEvento : String;
-  nProtocolo : String;
-  vXMLAux : TStringStream;
-  iAnt : Integer;
-  vTexto2 : WideString;
-  vLeitura : TStringList;
 begin
 
-  i     := 1;
 
-  mMemo1.Clear;
-  //mMemo1.Lines.Add(vxml.DataString);
-  mMemo1.Lines.Text := vxml.DataString;
-
-  while i > 0 do
-  begin
-    i := posex('<retEventoMDFe',copy(mMemo1.Lines.Text,1,Length(mMemo1.Lines.Text)));
-    if i > 0 then
-    begin
-      i2 := posex('</retEventoMDFe>',copy(mMemo1.Lines.Text,i,Length(mMemo1.Lines.Text)));
-      vTexto := copy(mMemo1.Lines.Text,1,i2+15);
-        tpEvento    := fnc_Busca_Evento(vTexto,'<tpEvento>');
-        xEvento     := fnc_Busca_Evento(vTexto,'<xEvento>');
-        dhRegEvento := fnc_Busca_Evento(vTexto,'<dhRegEvento>');
-        nProtocolo  := fnc_Busca_Evento(vTexto,'<nProtocolo>');
-    end;
-    iAnt := iAnt + i2;
-
-  end;
-  FreeAndNil(vXmlAux);
 
 end;
 
@@ -2533,18 +2555,51 @@ begin
   delete(Texto,1,i+(Length(Palavra)-1));
   i := posex('<',Texto);
   Result := copy(Texto,1,i-1);
+end;
 
 
-        {<tpEvento>110112</tpEvento>
-        <xEvento>Encerramento</xEvento>
-        <nSeqEvento>1</nSeqEvento>
-        <dhRegEvento>2020-02-10T13:39:55-03:00</dhRegEvento>
-        <nProt>943200001522728</nProt>}
-
-
-
+procedure TfrmCadMDFe.ConfigurarComponente;
+begin
+   fDMCadMDFe.qFilial_Certificados.Close;
+   fDMCadMDFe.qFilial_Certificados.ParamByName('ID').AsInteger := fDMCadMDFe.cdsFilialID.AsInteger;
+   fDMCadMDFe.qFilial_Certificados.Open;
+   {$IFDEF ACBrNFSeOpenSSL}
+    ACBrMDFe1.Configuracoes.Certificados.Certificado := fDMCadMDFe.qFilial_CertificadosNUMERO_SERIE.AsString;
+    ACBrMDFe1.Configuracoes.Certificados.Senha       := fDMCadMDFe.qFilial_CertificadosSENHA;
+   {$ELSE}
+    ACBrMDFe1.Configuracoes.Certificados.NumeroSerie := fDMCadMDFe.qFilial_CertificadosNUMERO_SERIE.AsString;
+   {$ENDIF}
+   ACBrMDFe1.Configuracoes.Geral.VersaoDF := ve300;
+   ACBrMDFe1.Configuracoes.WebServices.Ambiente := taProducao;
+   ACBrMDFe1.Configuracoes.WebServices.UF := 'RS';
 
 end;
 
+procedure TfrmCadMDFe.BuscarChave1Click(Sender: TObject);
+var
+  vRecibo : String;
+  vStatus : String;
+begin
+  prc_Posiciona_MDFe;
+
+  vRecibo := InputBox('Informe o recibo', 'Recibo',fDMCadMDFe.cdsMDFeRECIBO_MDFE.AsString);
+  if trim(vRecibo) = '' then
+    exit;
+
+  ConfigurarComponente;
+
+  ACBrMDFe1.WebServices.Recibo.Recibo := vRecibo;
+  ACBrMDFe1.WebServices.Recibo.Executar;
+//  vStatus := ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].cStat;
+  vStatus := IntToStr(ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].cStat);
+  if vStatus = '100' then
+  begin
+    vChaveAcesso_MDFe := ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].chDFe;
+    vProtocolo_MDFe := ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].nProt;
+    vDtProtocolo_MDFe := FormatDateTime('dd-mm-yyyy hh:mm',ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].dhRecbto);
+    prc_gravar_Busca;
+    fDMCadMDFe.prc_Localizar(fDMCadMDFe.cdsConsultaID.AsInteger);
+  end;
+end;
 
 end.

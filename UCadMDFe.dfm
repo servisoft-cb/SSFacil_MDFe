@@ -25,7 +25,7 @@ object frmCadMDFe: TfrmCadMDFe
     Top = 0
     Width = 931
     Height = 630
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadMDFe: TfrmCadMDFe
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1210,34 +1210,6 @@ object frmCadMDFe: TfrmCadMDFe
           Font.Style = []
           ParentFont = False
         end
-      end
-      object mmoMDFeRetorno: TMemo
-        Left = 56
-        Top = 200
-        Width = 385
-        Height = 241
-        Lines.Strings = (
-          'mmoMDFeRetorno')
-        ScrollBars = ssVertical
-        TabOrder = 6
-      end
-      object mMemo1: TMemo
-        Left = 496
-        Top = 200
-        Width = 393
-        Height = 241
-        Lines.Strings = (
-          'Memo1')
-        ScrollBars = ssVertical
-        TabOrder = 7
-      end
-      object BitBtn2: TBitBtn
-        Left = 192
-        Top = 248
-        Width = 75
-        Height = 25
-        Caption = 'BitBtn2'
-        TabOrder = 8
       end
     end
     object TS_Cadastro: TRzTabSheet
@@ -6103,8 +6075,12 @@ object frmCadMDFe: TfrmCadMDFe
       OnClick = ImprimirSemQRCode1Click
     end
     object Consultar1: TMenuItem
-      Caption = 'Consultar'
+      Caption = 'Consultar Encerramento'
       OnClick = Consultar1Click
+    end
+    object BuscarChave1: TMenuItem
+      Caption = 'Buscar Chave'
+      OnClick = BuscarChave1Click
     end
   end
   object ACBrMDFeDAMDFeRL1: TACBrMDFeDAMDFeRL
@@ -6129,8 +6105,8 @@ object frmCadMDFe: TfrmCadMDFe
     Top = 307
   end
   object ACBrMDFe1: TACBrMDFe
-    Configuracoes.Geral.SSLLib = libCapicom
-    Configuracoes.Geral.SSLCryptLib = cryCapicom
+    Configuracoes.Geral.SSLLib = libCustom
+    Configuracoes.Geral.SSLCryptLib = cryWinCrypt
     Configuracoes.Geral.SSLHttpLib = httpWinINet
     Configuracoes.Geral.SSLXmlSignLib = xsMsXmlCapicom
     Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'

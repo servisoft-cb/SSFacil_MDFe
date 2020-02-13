@@ -590,6 +590,18 @@ type
     mAuxEventoNomeEvento: TStringField;
     mAuxEventoDtRegistro: TStringField;
     mAuxEventoNumProtocolo: TStringField;
+    qFilial_Certificados: TSQLQuery;
+    qFilial_CertificadosNUMERO_SERIE: TStringField;
+    qFilial_CertificadosINTERVALOTENTATIVAS: TIntegerField;
+    qFilial_CertificadosCONSULTARLOTEAPOSENVIO: TStringField;
+    qFilial_CertificadosAGUARDARCONSULTARETORNO: TIntegerField;
+    qFilial_CertificadosUSUARIO_WEB: TStringField;
+    qFilial_CertificadosSENHA_WEB: TStringField;
+    qFilial_CertificadosNOME: TStringField;
+    qFilial_CertificadosID_PROVEDOR: TIntegerField;
+    qFilial_CertificadosCODMUNICIPIO: TStringField;
+    qFilial_CertificadosSENHA: TStringField;
+    dsmAuxEvento: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspMDFeUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

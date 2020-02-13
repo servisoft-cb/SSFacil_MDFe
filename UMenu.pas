@@ -47,6 +47,7 @@ type
     Image3: TImage;
     Label1: TLabel;
     Label2: TLabel;
+    ConfiigurarCertificado1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure EfetuarLogoff1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -59,6 +60,7 @@ type
     procedure tbPessoaClick(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
     procedure tbManifestoClick(Sender: TObject);
+    procedure ConfiigurarCertificado1Click(Sender: TObject);
   private
     { Private declarations }
     procedure prc_Habilita_Menu;
@@ -83,7 +85,7 @@ var
 implementation
 
 uses DmdDatabase, uUtilPadrao, UCadProprietario, UCadVeiculo, UCadCondutor,
-  UCadSeguradora, UCadMDFe;
+  UCadSeguradora, UCadMDFe, UCadFilial_Certificado;
 
 {$R *.dfm}
 
@@ -241,6 +243,11 @@ end;
 procedure TfMenu.tbManifestoClick(Sender: TObject);
 begin
   OpenForm(TfrmCadMDFe,wsMaximized,'');
+end;
+
+procedure TfMenu.ConfiigurarCertificado1Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadFilial_Certificado, wsMaximized,'');
 end;
 
 initialization

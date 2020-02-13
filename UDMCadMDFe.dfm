@@ -1,8 +1,8 @@
 object DMCadMDFe: TDMCadMDFe
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 66
-  Top = 8
+  Left = 408
+  Top = 57
   Height = 705
   Width = 973
   object sdsMDFe: TSQLDataSet
@@ -2724,7 +2724,7 @@ object DMCadMDFe: TDMCadMDFe
     DataSetField = cdsMDFesdsMDFe_Evento
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 456
+    Left = 472
     Top = 288
     object cdsMDFe_EventoID: TIntegerField
       FieldName = 'ID'
@@ -2766,7 +2766,7 @@ object DMCadMDFe: TDMCadMDFe
   end
   object dsMDFe_Evento: TDataSource
     DataSet = cdsMDFe_Evento
-    Left = 512
+    Left = 528
     Top = 288
   end
   object qVerifica_Condutor: TSQLQuery
@@ -3001,32 +3001,98 @@ object DMCadMDFe: TDMCadMDFe
     Top = 520
   end
   object mAuxEvento: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     Left = 672
     Top = 528
-    Data = {
-      970000009619E0BD010000001800000004000000000003000000970009436F64
-      4576656E746F01004900000001000557494454480200020007000A4E6F6D6545
-      76656E746F01004900000001000557494454480200020028000A447452656769
-      7374726F0100490000000100055749445448020002001E000C4E756D50726F74
-      6F636F6C6F01004900000001000557494454480200020028000000}
     object mAuxEventoCodEvento: TStringField
+      DisplayLabel = 'Cod.Evento'
       FieldName = 'CodEvento'
       Size = 7
     end
     object mAuxEventoNomeEvento: TStringField
+      DisplayLabel = 'Nome Evento'
       FieldName = 'NomeEvento'
       Size = 40
     end
     object mAuxEventoDtRegistro: TStringField
+      DisplayLabel = 'Data Registro'
       FieldName = 'DtRegistro'
       Size = 30
     end
     object mAuxEventoNumProtocolo: TStringField
+      DisplayLabel = 'Protocolo'
       FieldName = 'NumProtocolo'
       Size = 40
     end
+  end
+  object qFilial_Certificados: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      
+        'SELECT FC.numero_serie, FC.intervalotentativas, FC.consultarlote' +
+        'aposenvio,'
+      
+        'FC.aguardarconsultaretorno, FC.usuario_web, FC.senha_web, CID.no' +
+        'me, CID.id_provedor,'
+      'CID.codmunicipio, FC.SENHA'
+      'FROM FILIAL F'
+      'LEFT JOIN FILIAL_CERTIFICADOS FC'
+      'ON F.ID = FC.ID'
+      'INNER JOIN CIDADE CID'
+      'ON F.id_cidade = CID.ID'
+      'WHERE F.ID = :ID'
+      '')
+    SQLConnection = dmDatabase.scoDados
+    Left = 392
+    Top = 184
+    object qFilial_CertificadosNUMERO_SERIE: TStringField
+      FieldName = 'NUMERO_SERIE'
+      Size = 100
+    end
+    object qFilial_CertificadosINTERVALOTENTATIVAS: TIntegerField
+      FieldName = 'INTERVALOTENTATIVAS'
+    end
+    object qFilial_CertificadosCONSULTARLOTEAPOSENVIO: TStringField
+      FieldName = 'CONSULTARLOTEAPOSENVIO'
+      Size = 1
+    end
+    object qFilial_CertificadosAGUARDARCONSULTARETORNO: TIntegerField
+      FieldName = 'AGUARDARCONSULTARETORNO'
+    end
+    object qFilial_CertificadosUSUARIO_WEB: TStringField
+      FieldName = 'USUARIO_WEB'
+      Size = 100
+    end
+    object qFilial_CertificadosSENHA_WEB: TStringField
+      FieldName = 'SENHA_WEB'
+      Size = 30
+    end
+    object qFilial_CertificadosNOME: TStringField
+      FieldName = 'NOME'
+      Size = 40
+    end
+    object qFilial_CertificadosID_PROVEDOR: TIntegerField
+      FieldName = 'ID_PROVEDOR'
+    end
+    object qFilial_CertificadosCODMUNICIPIO: TStringField
+      FieldName = 'CODMUNICIPIO'
+      Size = 7
+    end
+    object qFilial_CertificadosSENHA: TStringField
+      FieldName = 'SENHA'
+      Size = 30
+    end
+  end
+  object dsmAuxEvento: TDataSource
+    DataSet = mAuxEvento
+    Left = 736
+    Top = 528
   end
 end

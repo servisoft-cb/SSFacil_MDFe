@@ -666,6 +666,10 @@ object fMenu: TfMenu
     object Cadastro1: TMenuItem
       Caption = 'Manuten'#231#227'o'
       ImageIndex = 0
+      object ConfiigurarCertificado1: TMenuItem
+        Caption = 'Configura'#231#227'o Certificado'
+        OnClick = ConfiigurarCertificado1Click
+      end
     end
     object N19: TMenuItem
       Caption = '|'

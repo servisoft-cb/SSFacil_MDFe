@@ -33,7 +33,10 @@ uses
   UCadMDFe_Condutor in 'UCadMDFe_Condutor.pas' {frmCadMDFe_Condutor},
   DmdDatabase_NFeBD in '..\ssfacil\DmdDatabase_NFeBD.pas' {dmDatabase_NFeBD: TDataModule},
   uNFeConsts in '..\ssfacil\uNFeConsts.pas',
-  UEncerrar_MDFe in 'UEncerrar_MDFe.pas' {frmEncerrar_MDFe};
+  UEncerrar_MDFe in 'UEncerrar_MDFe.pas' {frmEncerrar_MDFe},
+  UCadFilial_Certificado in '..\ServicoFacil\UCadFilial_Certificado.pas' {frmCadFilial_Certificado},
+  UDMCadFilial_Certificado in '..\ServicoFacil\UDMCadFilial_Certificado.pas' {DMFilial_Certificado: TDataModule},
+  UEventos_MDFe in 'UEventos_MDFe.pas' {frmEventosMDFe};
 
 {$R *.res}
 
@@ -41,5 +44,6 @@ begin
   Application.Initialize;
   Application.CreateForm(TdmDatabase, dmDatabase);
   Application.CreateForm(TfMenu, fMenu);
+  Application.CreateForm(TfrmEventosMDFe, frmEventosMDFe);
   Application.Run;
 end.
