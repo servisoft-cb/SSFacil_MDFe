@@ -2454,11 +2454,14 @@ procedure TfrmCadMDFe.Consultar1Click(Sender: TObject);
 var
   chave: string;
   i, j : Integer;
+  vIDAux : Integer;
 begin
   if not(fDMCadMDFe.cdsConsulta.Active) or (fDMCadMDFe.cdsConsulta.IsEmpty) then
     exit;
 
   prc_Posiciona_MDFe;
+
+  vIDAux := fDMCadMDFe.cdsMDFeID.AsInteger;
 
   chave := InputBox('Informe a chave', 'Chave',fDMCadMDFe.cdsMDFeCHAVE_ACESSO.AsString );
 
@@ -2507,6 +2510,9 @@ begin
      FreeAndNil(ffrmEventosMDFe);
   end;
 
+  prc_Consultar(0);
+
+  fDMCadMDFe.cdsConsulta.Locate('ID',vIDAux,[loCaseInsensitive]);
 
 //Desativei porque foi implementado o método acima pelo acbr - Russimar
 //  Xml := TMemoryStream.Create;
@@ -2579,8 +2585,10 @@ procedure TfrmCadMDFe.BuscarChave1Click(Sender: TObject);
 var
   vRecibo : String;
   vStatus : String;
+  vIDAux : Integer;
 begin
   prc_Posiciona_MDFe;
+  vIDAux := fDMCadMDFe.cdsMDFeID.AsInteger;
 
   vRecibo := InputBox('Informe o recibo', 'Recibo',fDMCadMDFe.cdsMDFeRECIBO_MDFE.AsString);
   if trim(vRecibo) = '' then
@@ -2600,6 +2608,10 @@ begin
     prc_gravar_Busca;
     fDMCadMDFe.prc_Localizar(fDMCadMDFe.cdsConsultaID.AsInteger);
   end;
+
+  prc_Consultar(0);
+
+  fDMCadMDFe.cdsConsulta.Locate('ID',vIDAux,[loCaseInsensitive]);
 end;
 
 end.
