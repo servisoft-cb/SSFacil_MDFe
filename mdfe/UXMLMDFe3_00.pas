@@ -193,7 +193,11 @@ begin
     prc_Modal_Rodoviario(fDMEnvio);
 
   //Cidade Descarregamento
+  fDMEnvio.cdsMDFe_Cidade_Des.Close;
+  fDMEnvio.cdsMDFe_Cidade_Des.Open;
   fDMEnvio.cdsMDFe_Cidade_Des.First;
+  fDMEnvio.cdsMDFe_NFe.Close;
+  fDMEnvio.cdsMDFe_NFe.Open;
   while not fDMEnvio.cdsMDFe_Cidade_Des.Eof do
   begin
     descarga := enviMDFe.MDFe.InfMDFe.InfDoc.Add;

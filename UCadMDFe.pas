@@ -1576,6 +1576,14 @@ begin
     fDMEnvio.cdsMDFe.Close;
     fDMEnvio.sdsMDFe.ParamByName('ID').AsInteger := fDMCadMDFe.cdsMDFeID.AsInteger;
     fDMEnvio.cdsMDFe.Open;
+    fDMEnvio.cdsMDFe_Cidade_Car.Close;
+    fDMEnvio.cdsMDFe_Cidade_Car.Open;
+    fDMEnvio.cdsMDFe_Condutor.Close;
+    fDMEnvio.cdsMDFe_Condutor.Open;
+    fDMEnvio.cdsMDFe_Cidade_Des.Close;
+    fDMEnvio.cdsMDFe_Cidade_Des.Open;
+    fDMEnvio.cdsMDFe_NFe.Close;
+    fDMEnvio.cdsMDFe_NFe.Open;
 
     fDMCadMDFe.cdsFilial.Locate('ID',fDMCadMDFe.cdsMDFeFilial.AsInteger,[loCaseInsensitive]);
 
