@@ -383,7 +383,7 @@ type
 
     procedure ConfigurarComponente;
     procedure prc_Gravar_Envio;
-    procedure prc_gravar_Busca;
+    procedure prc_gravar_Busca(Recibo : String = '');
     procedure prc_Gravar_Encerramento;
     procedure prc_Gravar_Cancelamento;
     procedure prc_Gravar_Evento_Condutor;
@@ -692,11 +692,10 @@ begin
     vStatus := IntToStr(ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].cStat);
   end;
 
-
   fDMCadMDFe.cdsMDFe.Edit;
   //TS_Consulta.TabEnabled := False;
 
-  if (trim(fDMCadMDFe.cdsMDFeRECIBO_MDFE.AsString) <> EmptyStr) and (vStatus <> '100') then
+  if (trim(fDMCadMDFe.cdsMDFeRECIBO_MDFE.AsString) <> EmptyStr) and (vStatus <> '100') and (vStatus <> '204')  then
     fDMCadMDFe.cdsMDFeRECIBO_MDFE.AsString := '';
   prc_Habilitar_CamposNota;
   fDMCadMDFe.cdsNotas.Close;
@@ -1658,7 +1657,7 @@ begin
   fDMCadMDFe.cdsMDFe.ApplyUpdates(0);
 end;
 
-procedure TfrmCadMDFe.prc_gravar_Busca;
+procedure TfrmCadMDFe.prc_gravar_Busca(Recibo : String = '');
 begin
   fDMCadMDFe.cdsMDFe.Edit;
   if Assigned(mMDFe) then
@@ -1670,6 +1669,8 @@ begin
   end;
   if trim(vChaveAcesso_MDFe) <> '' then
     fDMCadMDFe.cdsMDFeCHAVE_ACESSO.AsString     := vChaveAcesso_MDFe;
+  if trim(Recibo) <> '' then
+    fDMCadMDFe.cdsMDFeRECIBO_MDFE.AsString := Recibo;
   fDMCadMDFe.cdsMDFe.Post;
   fDMCadMDFe.cdsMDFe.ApplyUpdates(0);
 end;
@@ -2596,6 +2597,9 @@ var
   vIDAux : Integer;
 begin
   prc_Posiciona_MDFe;
+  if fDMCadMDFe.cdsMDFe.IsEmpty then
+    exit;
+
   vIDAux := fDMCadMDFe.cdsMDFeID.AsInteger;
 
   vRecibo := InputBox('Informe o recibo', 'Recibo',fDMCadMDFe.cdsMDFeRECIBO_MDFE.AsString);
@@ -2608,12 +2612,12 @@ begin
   ACBrMDFe1.WebServices.Recibo.Executar;
 //  vStatus := ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].cStat;
   vStatus := IntToStr(ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].cStat);
-  if vStatus = '100' then
+  if (vStatus = '100') then
   begin
     vChaveAcesso_MDFe := ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].chDFe;
-    vProtocolo_MDFe := ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].nProt;
+    vProtocolo_MDFe   := ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].nProt;
     vDtProtocolo_MDFe := FormatDateTime('dd-mm-yyyy hh:mm',ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].dhRecbto);
-    prc_gravar_Busca;
+    prc_gravar_Busca(vRecibo);
     fDMCadMDFe.prc_Localizar(fDMCadMDFe.cdsConsultaID.AsInteger);
   end;
 

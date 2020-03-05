@@ -25,7 +25,7 @@ object frmCadMDFe: TfrmCadMDFe
     Top = 0
     Width = 931
     Height = 630
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadMDFe: TfrmCadMDFe
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1445,7 +1445,7 @@ object frmCadMDFe: TfrmCadMDFe
         Top = 185
         Width = 927
         Height = 422
-        ActivePage = TS_NFe
+        ActivePage = TS_MDFe
         ActivePageDefault = TS_NFe
         Align = alClient
         BackgroundColor = clSilver
@@ -1453,7 +1453,7 @@ object frmCadMDFe: TfrmCadMDFe
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 3
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
