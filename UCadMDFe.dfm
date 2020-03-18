@@ -25,7 +25,7 @@ object frmCadMDFe: TfrmCadMDFe
     Top = 0
     Width = 931
     Height = 630
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadMDFe: TfrmCadMDFe
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1445,7 +1445,7 @@ object frmCadMDFe: TfrmCadMDFe
         Top = 185
         Width = 927
         Height = 422
-        ActivePage = TS_MDFe
+        ActivePage = TS_NFe
         ActivePageDefault = TS_NFe
         Align = alClient
         BackgroundColor = clSilver
@@ -1453,7 +1453,7 @@ object frmCadMDFe: TfrmCadMDFe
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 3
+        TabIndex = 0
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -6085,10 +6085,10 @@ object frmCadMDFe: TfrmCadMDFe
   end
   object ACBrMDFeDAMDFeRL1: TACBrMDFeDAMDFeRL
     Sistema = 'SSFacil (MDFe)'
-    MargemInferior = 0.800000000000000000
-    MargemSuperior = 0.800000000000000000
-    MargemEsquerda = 0.600000000000000000
-    MargemDireita = 0.510000000000000000
+    MargemInferior = 8.000000000000000000
+    MargemSuperior = 8.000000000000000000
+    MargemEsquerda = 5.000000000000000000
+    MargemDireita = 5.000000000000000000
     ExpandeLogoMarcaConfig.Altura = 0
     ExpandeLogoMarcaConfig.Esquerda = 0
     ExpandeLogoMarcaConfig.Topo = 0
