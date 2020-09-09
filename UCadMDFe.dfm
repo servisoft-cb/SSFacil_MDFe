@@ -25,7 +25,7 @@ object frmCadMDFe: TfrmCadMDFe
     Top = 0
     Width = 931
     Height = 630
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadMDFe: TfrmCadMDFe
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -533,6 +533,7 @@ object frmCadMDFe: TfrmCadMDFe
           ShowArrow = True
           TabOrder = 3
           Transparent = True
+          Visible = False
         end
       end
       object SMDBGrid1: TSMDBGrid
