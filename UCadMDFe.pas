@@ -265,6 +265,7 @@ type
     Button1: TButton;
     Consultar1: TMenuItem;
     BuscarChave1: TMenuItem;
+    GravaraChave1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -349,6 +350,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Consultar1Click(Sender: TObject);
     procedure BuscarChave1Click(Sender: TObject);
+    procedure GravaraChave1Click(Sender: TObject);
   private
     { Private declarations }
     mMDFe: TMemoryStream;
@@ -689,7 +691,8 @@ begin
 
     ACBrMDFe1.WebServices.Recibo.Recibo := fDMCadMDFe.cdsMDFeRECIBO_MDFE.AsString;
     ACBrMDFe1.WebServices.Recibo.Executar;
-    vStatus := IntToStr(ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].cStat);
+    vStatus := IntToStr(ACBrMDFe1.WebServices.Recibo.MDFeRetorno.cStat);
+    //vStatus := IntToStr(ACBrMDFe1.WebServices.Recibo.MDFeRetorno.ProtDFe.Items[0].cStat);
   end;
 
   fDMCadMDFe.cdsMDFe.Edit;
@@ -2283,7 +2286,9 @@ begin
 
   mMDFe := TMemoryStream.Create;
   mMDFe.Position := 0;
-  fDMCadMDFe.cdsConsultaXML_ASSINADO.SaveToStream(mMDFe);
+  //fDMCadMDFe.cdsConsultaXML_ASSINADO.SaveToStream(mMDFe);
+  fDMCadMDFe.cdsMDFeXML_ASSINADO.SaveToStream(mMDFe);
+
   //mMDFe.LoadFromStream();
   mMDFe.Position := 0;
 
@@ -2360,6 +2365,8 @@ procedure TfrmCadMDFe.Encerrar1Click(Sender: TObject);
 begin
   frmEncerrar_MDFe := TfrmEncerrar_MDFe.Create(self);
   frmEncerrar_MDFe.fDMCadMDFe := fDMCadMDFe;
+  if (fDMCadMDFe.cdsConsulta.Active) and (fDMCadMDFe.cdsConsultaID.AsInteger > 0) then
+    frmEncerrar_MDFe.Edit1.Text := fDMCadMDFe.cdsConsultaCHAVE_ACESSO.AsString;
   frmEncerrar_MDFe.ShowModal;
   FreeAndNil(frmEncerrar_MDFe);
 end;
@@ -2623,6 +2630,38 @@ begin
 
   prc_Consultar(0);
 
+  fDMCadMDFe.cdsConsulta.Locate('ID',vIDAux,[loCaseInsensitive]);
+end;
+
+procedure TfrmCadMDFe.GravaraChave1Click(Sender: TObject);
+var
+  vChave : String;
+  i : Integer;
+  texto : widestring;
+  vIDAux : Integer;
+begin
+  prc_Posiciona_MDFe;
+  if (trim(fDMCadMDFe.cdsMDFeCHAVE_ACESSO.AsString) = '') and (trim(fDMCadMDFe.cdsMDFeXML_ASSINADO.Value) <> '') then
+  begin
+    texto := fDMCadMDFe.cdsMDFeXML_ASSINADO.Value;
+    i := posex('<infMDFe Id="MDFe',texto);
+    if i > 0 then
+      vChave := copy(texto,i+17,44);
+  end;
+
+  vIDAux := fDMCadMDFe.cdsMDFeID.AsInteger;
+
+  vchave := InputBox('Informe a chave', 'Chave',vchave);
+  if trim(vChave) = '' then
+    exit;
+
+  fDMCadMDFe.cdsMDFe.Edit;
+  fDMCadMDFe.cdsMDFeCHAVE_ACESSO.AsString := vChave;
+  fDMCadMDFe.cdsMDFe.Post;
+  fDMCadMDFe.cdsMDFe.ApplyUpdates(0);
+
+  btnConsultarClick(Sender);
+  
   fDMCadMDFe.cdsConsulta.Locate('ID',vIDAux,[loCaseInsensitive]);
 end;
 

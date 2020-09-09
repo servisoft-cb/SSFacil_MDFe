@@ -1,6 +1,6 @@
 object frmCadMDFe: TfrmCadMDFe
   Left = 248
-  Top = 42
+  Top = 61
   Width = 947
   Height = 669
   Caption = 'MDFe'
@@ -25,7 +25,7 @@ object frmCadMDFe: TfrmCadMDFe
     Top = 0
     Width = 931
     Height = 630
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadMDFe: TfrmCadMDFe
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -673,10 +673,12 @@ object frmCadMDFe: TfrmCadMDFe
             Visible = True
           end
           item
+            Alignment = taCenter
             Expanded = False
             FieldName = 'DESC_UNIDADE_PESO'
             Title.Alignment = taCenter
             Title.Caption = 'Unid. Peso'
+            Width = 62
             Visible = True
           end
           item
@@ -684,7 +686,7 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'DESC_TIPO_EMITENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Emitente'
-            Width = 64
+            Width = 159
             Visible = True
           end
           item
@@ -692,7 +694,7 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'DESC_TIPO_TRANSPORTADOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Transportador'
-            Width = 64
+            Width = 178
             Visible = True
           end
           item
@@ -700,7 +702,7 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'DESC_MODALIDADE_TRANSP'
             Title.Alignment = taCenter
             Title.Caption = 'Modalidade Transp'
-            Width = 64
+            Width = 135
             Visible = True
           end
           item
@@ -708,22 +710,6 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'DESC_FORMA_EMISSAO'
             Title.Alignment = taCenter
             Title.Caption = 'Forma Emiss'#227'o'
-            Width = 64
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOME_INTERNO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nome Filial (Emitente)'
-            Width = 64
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'ID'
-            Title.Alignment = taCenter
             Visible = True
           end
           item
@@ -731,7 +717,22 @@ object frmCadMDFe: TfrmCadMDFe
             FieldName = 'PROTOCOLO_ENC'
             Title.Alignment = taCenter
             Title.Caption = 'Protocolo Encerramento'
-            Width = 64
+            Width = 238
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOME_INTERNO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nome Filial (Emitente)'
+            Width = 248
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'ID'
+            Title.Alignment = taCenter
             Visible = True
           end>
       end
@@ -6066,6 +6067,10 @@ object frmCadMDFe: TfrmCadMDFe
       Caption = 'Buscar'
       OnClick = Buscar1Click
     end
+    object GravaraChave1: TMenuItem
+      Caption = 'Gravar a Chave'
+      OnClick = GravaraChave1Click
+    end
     object Encerrar1: TMenuItem
       Caption = 'Encerrar'
       OnClick = Encerrar1Click
@@ -6079,7 +6084,7 @@ object frmCadMDFe: TfrmCadMDFe
       OnClick = Consultar1Click
     end
     object BuscarChave1: TMenuItem
-      Caption = 'Buscar Chave'
+      Caption = 'Buscar Chave / Protoocolo'
       OnClick = BuscarChave1Click
     end
   end

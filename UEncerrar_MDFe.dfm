@@ -1,6 +1,6 @@
 object frmEncerrar_MDFe: TfrmEncerrar_MDFe
-  Left = 320
-  Top = 183
+  Left = 334
+  Top = 242
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmEncerrar_MDFe'

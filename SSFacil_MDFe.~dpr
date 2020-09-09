@@ -44,6 +44,5 @@ begin
   Application.Initialize;
   Application.CreateForm(TdmDatabase, dmDatabase);
   Application.CreateForm(TfMenu, fMenu);
-  Application.CreateForm(TfrmEventosMDFe, frmEventosMDFe);
   Application.Run;
 end.
