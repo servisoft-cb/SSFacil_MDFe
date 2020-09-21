@@ -1,9 +1,9 @@
 object DMCadMDFe: TDMCadMDFe
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 408
-  Top = 57
-  Height = 705
+  Left = 286
+  Top = 61
+  Height = 760
   Width = 973
   object sdsMDFe: TSQLDataSet
     NoMetadata = True

@@ -737,6 +737,8 @@ end;
 procedure TDMCadMDFe.prc_Gravar;
 begin
   vMsgMDFe := '';
+  if cdsMDFeDTEMISSAO.AsDateTime <= 10 then
+    vMsgMDFe := vMsgMDFe + #13 + '*** Data de Emissão não informada!';
   if trim(cdsMDFeUF_CARREGAMENTO.AsString) = '' then
     vMsgMDFe := vMsgMDFe + #13 + '*** UF de carregamento não informada!';
   if trim(cdsMDFeUF_DESCARREGAMENTO.AsString) = '' then
